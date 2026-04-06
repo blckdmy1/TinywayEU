@@ -194,115 +194,136 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6">
-          <div className="flex flex-wrap items-center gap-4">
-            <span>Fast delivery across Europe</span>
-            <span className="hidden md:inline">•</span>
-            <span>Secure payments</span>
-            <span className="hidden md:inline">•</span>
-            <span>Simple returns</span>
-          </div>
+      {/* Main Header - Dark Background */}
+      <header className="sticky top-0 z-40 bg-[#232f3e] text-white">
+        {/* Top Row: Logo, Search, Account, Cart */}
+        <div className="mx-auto max-w-[1500px] px-4">
+          <div className="flex items-center gap-4 py-2">
+            {/* Logo */}
+            <Link href="/" className="shrink-0 py-2 px-1 border border-transparent rounded hover:border-white">
+              <span className="text-xl font-bold tracking-tight">TinyWay</span>
+              <span className="text-xs text-[#f90]">.eu</span>
+            </Link>
 
-          <div className="flex items-center gap-4 text-sm">
-            <Link href="/delivery" className="hover:text-foreground">
-              Delivery
+            {/* Deliver To */}
+            <Link href="/delivery" className="hidden md:flex flex-col px-2 py-1 border border-transparent rounded hover:border-white">
+              <span className="text-xs text-gray-300">Deliver to</span>
+              <span className="text-sm font-bold flex items-center gap-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Europe
+              </span>
             </Link>
-            <Link href="/payment" className="hover:text-foreground">
-              Payment
+
+            {/* Search Bar */}
+            <div className="flex flex-1 max-w-3xl">
+              <select className="hidden md:block bg-[#e6e6e6] text-[#555] text-xs px-2 py-2 rounded-l-md border-r border-gray-300 outline-none cursor-pointer">
+                <option>All</option>
+                {categories.slice(0, 8).map((cat) => (
+                  <option key={cat.slug}>{cat.name}</option>
+                ))}
+              </select>
+              <input
+                type="text"
+                placeholder="Search TinyWay"
+                className="w-full px-3 py-2 text-sm text-black outline-none md:rounded-none rounded-l-md"
+              />
+              <button className="bg-[#febd69] hover:bg-[#f3a847] px-4 py-2 rounded-r-md transition">
+                <svg className="w-5 h-5 text-[#232f3e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Language */}
+            <button className="hidden lg:flex items-center gap-1 px-2 py-1 border border-transparent rounded hover:border-white">
+              <span className="text-sm">EN</span>
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* Account */}
+            <Link
+              href={user ? "/cabinet" : "/login"}
+              className="flex flex-col px-2 py-1 border border-transparent rounded hover:border-white"
+            >
+              <span className="text-xs text-gray-300">
+                {user ? `Hello, ${user.email.split("@")[0]}` : "Hello, sign in"}
+              </span>
+              <span className="text-sm font-bold flex items-center gap-1">
+                Account & Lists
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
             </Link>
-            <Link href="/returns" className="hover:text-foreground">
-              Returns
+
+            {/* Returns & Orders */}
+            <Link
+              href="/cabinet"
+              className="hidden md:flex flex-col px-2 py-1 border border-transparent rounded hover:border-white"
+            >
+              <span className="text-xs text-gray-300">Returns</span>
+              <span className="text-sm font-bold">& Orders</span>
             </Link>
-            <Link href="/contact-us" className="hover:text-foreground">
-              Support
+
+            {/* Cart */}
+            <Link
+              href="/cart"
+              className="flex items-center gap-1 px-2 py-1 border border-transparent rounded hover:border-white"
+            >
+              <div className="relative">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span className="absolute -top-1 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#f90] text-xs font-bold text-[#232f3e]">
+                  {cart.length}
+                </span>
+              </div>
+              <span className="hidden sm:block text-sm font-bold">Cart</span>
             </Link>
           </div>
         </div>
-      </div>
 
-      <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
-        <div className="mx-auto max-w-7xl px-4 py-4 md:px-6">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
-              <Link href="/" className="shrink-0">
-                <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-                  TinyWay.eu
-                </h1>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Easy shopping for everyday essentials
-                </p>
+        {/* Bottom Row: Navigation */}
+        <div className="bg-[#37475a]">
+          <div className="mx-auto max-w-[1500px] px-4">
+            <nav className="flex items-center gap-1 overflow-x-auto py-1 text-sm scrollbar-hide">
+              <button className="flex items-center gap-1 whitespace-nowrap px-2 py-1 font-bold border border-transparent rounded hover:border-white">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                All
+              </button>
+              <Link href="/deals" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                Today&apos;s Deals
               </Link>
-
-              <div className="flex w-full max-w-3xl items-center overflow-hidden rounded-2xl border border-border bg-muted shadow-sm">
-                <button className="hidden border-r border-border px-4 py-3 text-sm font-medium text-foreground md:block">
-                  All Categories
-                </button>
-
-                <input
-                  type="text"
-                  placeholder="Search for products, brands or categories"
-                  className="w-full bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-muted-foreground"
-                />
-
-                <button className="bg-primary px-5 py-3.5 text-sm font-medium text-primary-foreground transition hover:opacity-90">
-                  Search
-                </button>
-              </div>
-
-              <div className="flex items-center gap-3">
-                {user ? (
-                  <Link
-                    href="/cabinet"
-                    className="flex h-11 min-w-[44px] items-center justify-center rounded-xl border border-border bg-card px-3 text-sm font-medium transition hover:border-primary hover:text-primary"
-                    title={user.email}
-                  >
-                    Account
-                  </Link>
-                ) : (
-                  <Link
-                    href="/login"
-                    className="rounded-xl border border-border px-4 py-2.5 text-sm font-medium transition hover:border-primary hover:text-primary"
-                  >
-                    Login
-                  </Link>
-                )}
-
-                <Link
-                  href="/cart"
-                  className="relative rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90"
-                >
-                  Cart
-                  {cart.length > 0 && (
-                    <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
-                      {cart.length}
-                    </span>
-                  )}
-                </Link>
-              </div>
-            </div>
-
-            <nav className="flex flex-wrap gap-5 text-sm font-medium text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">
-                Home
-              </Link>
-              <Link href="/categories" className="hover:text-foreground">
-                Categories
-              </Link>
-              <Link href="/deals" className="hover:text-foreground">
-                Deals
-              </Link>
-              <Link href="/new-arrivals" className="hover:text-foreground">
-                New Arrivals
-              </Link>
-              <Link href="/best-sellers" className="hover:text-foreground">
+              <Link href="/best-sellers" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
                 Best Sellers
               </Link>
-              <Link href="/contact-us" className="hover:text-foreground">
-                Contact Us
+              <Link href="/new-arrivals" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                New Arrivals
               </Link>
-              <Link href="/my-account" className="hover:text-foreground">
-                My Account
+              <Link href="/category/phones" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                Phones
+              </Link>
+              <Link href="/category/computers" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                Computers
+              </Link>
+              <Link href="/category/tv-audio" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                TV & Audio
+              </Link>
+              <Link href="/category/gaming" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                Gaming
+              </Link>
+              <Link href="/category/home-appliances" className="hidden lg:block whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                Home
+              </Link>
+              <Link href="/contact-us" className="hidden lg:block whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+                Customer Service
               </Link>
             </nav>
           </div>
