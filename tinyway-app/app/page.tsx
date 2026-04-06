@@ -201,8 +201,8 @@ export default function HomePage() {
           <div className="flex items-center gap-3 py-3 md:gap-4">
             {/* Logo */}
             <Link href="/" className="shrink-0 py-1 px-2 rounded-lg hover:bg-primary-foreground/10 transition">
-              <span className="text-2xl font-bold tracking-tight">TinyWay</span>
-              <span className="text-sm text-accent font-semibold">.eu</span>
+              <span className="text-2xl font-bold tracking-tight font-serif">TinyWay</span>
+              <span className="text-sm text-primary-foreground/80 font-medium">.eu</span>
             </Link>
 
             {/* Deliver To */}
@@ -230,8 +230,8 @@ export default function HomePage() {
                 placeholder="Search products, brands, categories..."
                 className="w-full px-4 py-2.5 text-sm text-foreground bg-card outline-none md:rounded-none rounded-l-xl placeholder:text-muted-foreground"
               />
-              <button className="bg-accent hover:bg-accent/80 px-4 py-2.5 rounded-r-xl transition">
-                <svg className="w-5 h-5 text-accent-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <button className="bg-primary-foreground hover:bg-primary-foreground/90 px-4 py-2.5 rounded-r-xl transition">
+                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
@@ -271,7 +271,7 @@ export default function HomePage() {
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary-foreground text-[11px] font-bold text-primary">
                   {cart.length}
                 </span>
               </div>
