@@ -194,21 +194,21 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      {/* Main Header - Dark Background */}
-      <header className="sticky top-0 z-40 bg-[#232f3e] text-white">
+      {/* Main Header - Warm Theme */}
+      <header className="sticky top-0 z-40 bg-primary text-primary-foreground shadow-md">
         {/* Top Row: Logo, Search, Account, Cart */}
         <div className="mx-auto max-w-[1500px] px-4">
-          <div className="flex items-center gap-4 py-2">
+          <div className="flex items-center gap-3 py-3 md:gap-4">
             {/* Logo */}
-            <Link href="/" className="shrink-0 py-2 px-1 border border-transparent rounded hover:border-white">
-              <span className="text-xl font-bold tracking-tight">TinyWay</span>
-              <span className="text-xs text-[#f90]">.eu</span>
+            <Link href="/" className="shrink-0 py-1 px-2 rounded-lg hover:bg-primary-foreground/10 transition">
+              <span className="text-2xl font-bold tracking-tight">TinyWay</span>
+              <span className="text-sm text-accent font-semibold">.eu</span>
             </Link>
 
             {/* Deliver To */}
-            <Link href="/delivery" className="hidden md:flex flex-col px-2 py-1 border border-transparent rounded hover:border-white">
-              <span className="text-xs text-gray-300">Deliver to</span>
-              <span className="text-sm font-bold flex items-center gap-1">
+            <Link href="/delivery" className="hidden md:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
+              <span className="text-xs text-primary-foreground/70">Deliver to</span>
+              <span className="text-sm font-semibold flex items-center gap-1">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -219,111 +219,100 @@ export default function HomePage() {
 
             {/* Search Bar */}
             <div className="flex flex-1 max-w-3xl">
-              <select className="hidden md:block bg-[#e6e6e6] text-[#555] text-xs px-2 py-2 rounded-l-md border-r border-gray-300 outline-none cursor-pointer">
-                <option>All</option>
+              <select className="hidden md:block bg-muted text-foreground text-xs px-3 py-2.5 rounded-l-xl border-r border-border outline-none cursor-pointer">
+                <option>All Categories</option>
                 {categories.slice(0, 8).map((cat) => (
                   <option key={cat.slug}>{cat.name}</option>
                 ))}
               </select>
               <input
                 type="text"
-                placeholder="Search TinyWay"
-                className="w-full px-3 py-2 text-sm text-black outline-none md:rounded-none rounded-l-md"
+                placeholder="Search products, brands, categories..."
+                className="w-full px-4 py-2.5 text-sm text-foreground bg-card outline-none md:rounded-none rounded-l-xl placeholder:text-muted-foreground"
               />
-              <button className="bg-[#febd69] hover:bg-[#f3a847] px-4 py-2 rounded-r-md transition">
-                <svg className="w-5 h-5 text-[#232f3e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <button className="bg-accent hover:bg-accent/80 px-4 py-2.5 rounded-r-xl transition">
+                <svg className="w-5 h-5 text-accent-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
             </div>
 
-            {/* Language */}
-            <button className="hidden lg:flex items-center gap-1 px-2 py-1 border border-transparent rounded hover:border-white">
-              <span className="text-sm">EN</span>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
             {/* Account */}
             <Link
               href={user ? "/cabinet" : "/login"}
-              className="flex flex-col px-2 py-1 border border-transparent rounded hover:border-white"
+              className="hidden sm:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
             >
-              <span className="text-xs text-gray-300">
+              <span className="text-xs text-primary-foreground/70">
                 {user ? `Hello, ${user.email.split("@")[0]}` : "Hello, sign in"}
               </span>
-              <span className="text-sm font-bold flex items-center gap-1">
-                Account & Lists
+              <span className="text-sm font-semibold flex items-center gap-1">
+                Account
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </span>
             </Link>
 
-            {/* Returns & Orders */}
+            {/* Orders */}
             <Link
               href="/cabinet"
-              className="hidden md:flex flex-col px-2 py-1 border border-transparent rounded hover:border-white"
+              className="hidden lg:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
             >
-              <span className="text-xs text-gray-300">Returns</span>
-              <span className="text-sm font-bold">& Orders</span>
+              <span className="text-xs text-primary-foreground/70">Returns</span>
+              <span className="text-sm font-semibold">& Orders</span>
             </Link>
 
             {/* Cart */}
             <Link
               href="/cart"
-              className="flex items-center gap-1 px-2 py-1 border border-transparent rounded hover:border-white"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
             >
               <div className="relative">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <span className="absolute -top-1 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#f90] text-xs font-bold text-[#232f3e]">
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">
                   {cart.length}
                 </span>
               </div>
-              <span className="hidden sm:block text-sm font-bold">Cart</span>
+              <span className="hidden sm:block text-sm font-semibold">Cart</span>
             </Link>
           </div>
         </div>
 
         {/* Bottom Row: Navigation */}
-        <div className="bg-[#37475a]">
+        <div className="bg-primary/80 border-t border-primary-foreground/10">
           <div className="mx-auto max-w-[1500px] px-4">
-            <nav className="flex items-center gap-1 overflow-x-auto py-1 text-sm scrollbar-hide">
-              <button className="flex items-center gap-1 whitespace-nowrap px-2 py-1 font-bold border border-transparent rounded hover:border-white">
+            <nav className="flex items-center gap-1 overflow-x-auto py-2 text-sm">
+              <button className="flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 font-semibold rounded-lg hover:bg-primary-foreground/10 transition">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
-                All
+                All Categories
               </button>
-              <Link href="/deals" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+              <Link href="/deals" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
                 Today&apos;s Deals
               </Link>
-              <Link href="/best-sellers" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+              <Link href="/best-sellers" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
                 Best Sellers
               </Link>
-              <Link href="/new-arrivals" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+              <Link href="/new-arrivals" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
                 New Arrivals
               </Link>
-              <Link href="/category/phones" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+              <Link href="/category/phones" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
                 Phones
               </Link>
-              <Link href="/category/computers" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+              <Link href="/category/computers" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
                 Computers
               </Link>
-              <Link href="/category/tv-audio" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+              <Link href="/category/tv-audio" className="hidden md:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
                 TV & Audio
               </Link>
-              <Link href="/category/gaming" className="whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
+              <Link href="/category/gaming" className="hidden md:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
                 Gaming
               </Link>
-              <Link href="/category/home-appliances" className="hidden lg:block whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
-                Home
-              </Link>
-              <Link href="/contact-us" className="hidden lg:block whitespace-nowrap px-2 py-1 border border-transparent rounded hover:border-white">
-                Customer Service
+              <Link href="/contact-us" className="hidden lg:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
+                Help & Support
               </Link>
             </nav>
           </div>
