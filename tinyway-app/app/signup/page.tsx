@@ -204,18 +204,18 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-screen bg-muted/30">
+    <main className="min-h-screen bg-black">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border/50 bg-card/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-baseline gap-0.5 group">
-              <span className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition">TinyWay</span>
+              <span className="text-xl font-bold tracking-tight text-white group-hover:text-primary transition">TinyWay</span>
               <span className="text-sm font-medium text-primary">.eu</span>
             </Link>
             <Link
               href="/login"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition"
+              className="text-sm font-medium text-white/60 hover:text-white transition"
             >
               {t("login")}
             </Link>
@@ -226,19 +226,19 @@ export default function SignupPage() {
       <div className="mx-auto max-w-2xl px-4 py-12 md:py-20">
         {/* Title */}
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-foreground md:text-4xl">{t("createAccount")}</h1>
-          <p className="mt-3 text-muted-foreground">{t("chooseAccountType")}</p>
+          <h1 className="text-3xl font-bold text-white md:text-4xl">{t("createAccount")}</h1>
+          <p className="mt-3 text-white/60">{t("chooseAccountType")}</p>
         </div>
 
         {/* Account Type Toggle */}
-        <div className="flex p-1 bg-muted rounded-full mb-8">
+        <div className="flex p-1 bg-white/10 rounded-full mb-8">
           <button
             type="button"
             onClick={() => setUserType("customer")}
             className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full text-sm font-medium transition ${
               userType === "customer"
-                ? "bg-card text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-white text-black shadow-sm"
+                : "text-white/60 hover:text-white"
             }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -251,8 +251,8 @@ export default function SignupPage() {
             onClick={() => setUserType("partner")}
             className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full text-sm font-medium transition ${
               userType === "partner"
-                ? "bg-card text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-white text-black shadow-sm"
+                : "text-white/60 hover:text-white"
             }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,18 +263,18 @@ export default function SignupPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-card rounded-3xl border border-border shadow-sm p-6 md:p-8">
+        <div className="bg-white/5 rounded-3xl border border-white/10 shadow-sm p-6 md:p-8 backdrop-blur-sm">
           <form onSubmit={handleSignup} className="space-y-5">
             {userType === "customer" ? (
               <>
                 {/* Customer Form */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("firstName")} <span className="text-destructive">*</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("firstName")} <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
-                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                       <input
@@ -283,13 +283,13 @@ export default function SignupPage() {
                         value={customerForm.name}
                         onChange={handleCustomerChange}
                         placeholder="John"
-                        className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                        className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("lastName")} <span className="text-destructive">*</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("lastName")} <span className="text-red-400">*</span>
                     </label>
                     <input
                       name="surname"
@@ -297,28 +297,28 @@ export default function SignupPage() {
                       value={customerForm.surname}
                       onChange={handleCustomerChange}
                       placeholder="Doe"
-                      className="w-full h-12 px-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 px-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("phoneNumber")} <span className="text-destructive">*</span>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    {t("phoneNumber")} <span className="text-red-400">*</span>
                   </label>
                   <div className="flex gap-3">
                     <select
                       name="phoneCountryCode"
                       value={customerForm.phoneCountryCode}
                       onChange={handleCustomerChange}
-                      className="h-12 px-3 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary transition text-foreground w-28"
+                      className="h-12 px-3 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary transition text-white w-28"
                     >
                       {countryOptions.map((c) => (
-                        <option key={c.code} value={c.code}>{c.flag} {c.code}</option>
+                        <option key={c.code} value={c.code} className="bg-black text-white">{c.flag} {c.code}</option>
                       ))}
                     </select>
                     <div className="relative flex-1">
-                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                       <input
@@ -327,18 +327,18 @@ export default function SignupPage() {
                         value={customerForm.phoneNumber}
                         onChange={handleCustomerChange}
                         placeholder="20123456"
-                        className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                        className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                       />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("email")} <span className="text-destructive">*</span>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    {t("email")} <span className="text-red-400">*</span>
                   </label>
                   <div className="relative">
-                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     <input
@@ -347,17 +347,17 @@ export default function SignupPage() {
                       value={customerForm.email}
                       onChange={handleCustomerChange}
                       placeholder="john@example.com"
-                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("address")} <span className="text-muted-foreground text-xs">({t("optional")})</span>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    {t("address")} <span className="text-white/40 text-xs">({t("optional")})</span>
                   </label>
                   <div className="relative">
-                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -367,18 +367,18 @@ export default function SignupPage() {
                       value={customerForm.address}
                       onChange={handleCustomerChange}
                       placeholder="Street, City, Country"
-                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("password")} <span className="text-destructive">*</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("password")} <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
-                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                       <input
@@ -387,12 +387,12 @@ export default function SignupPage() {
                         value={customerForm.password}
                         onChange={handleCustomerChange}
                         placeholder="Min 6 chars"
-                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                        className="w-full h-12 pl-12 pr-12 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition"
                       >
                         {showPassword ? (
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -408,11 +408,11 @@ export default function SignupPage() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("repeatPassword")} <span className="text-destructive">*</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("repeatPassword")} <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
-                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                       <input
@@ -421,12 +421,12 @@ export default function SignupPage() {
                         value={customerForm.repeatPassword}
                         onChange={handleCustomerChange}
                         placeholder="Repeat"
-                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                        className="w-full h-12 pl-12 pr-12 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                       />
                       <button
                         type="button"
                         onClick={() => setShowRepeatPassword(!showRepeatPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition"
                       >
                         {showRepeatPassword ? (
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -447,11 +447,11 @@ export default function SignupPage() {
               <>
                 {/* Partner Form */}
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("companyName")} <span className="text-destructive">*</span>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    {t("companyName")} <span className="text-red-400">*</span>
                   </label>
                   <div className="relative">
-                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                     <input
@@ -460,15 +460,15 @@ export default function SignupPage() {
                       value={partnerForm.companyName}
                       onChange={handlePartnerChange}
                       placeholder="Company Ltd."
-                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("regNumber")} <span className="text-destructive">*</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("regNumber")} <span className="text-red-400">*</span>
                     </label>
                     <input
                       name="companyRegistrationNumber"
@@ -476,12 +476,12 @@ export default function SignupPage() {
                       value={partnerForm.companyRegistrationNumber}
                       onChange={handlePartnerChange}
                       placeholder="40001234567"
-                      className="w-full h-12 px-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 px-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("vatNumber")} <span className="text-muted-foreground text-xs">({t("optional")})</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("vatNumber")} <span className="text-white/40 text-xs">({t("optional")})</span>
                     </label>
                     <input
                       name="vatNumber"
@@ -489,28 +489,28 @@ export default function SignupPage() {
                       value={partnerForm.vatNumber}
                       onChange={handlePartnerChange}
                       placeholder="LV40001234567"
-                      className="w-full h-12 px-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 px-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("phoneNumber")} <span className="text-destructive">*</span>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    {t("phoneNumber")} <span className="text-red-400">*</span>
                   </label>
                   <div className="flex gap-3">
                     <select
                       name="phoneCountryCode"
                       value={partnerForm.phoneCountryCode}
                       onChange={handlePartnerChange}
-                      className="h-12 px-3 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary transition text-foreground w-28"
+                      className="h-12 px-3 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary transition text-white w-28"
                     >
                       {countryOptions.map((c) => (
                         <option key={c.code} value={c.code}>{c.flag} {c.code}</option>
                       ))}
                     </select>
                     <div className="relative flex-1">
-                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                       <input
@@ -519,18 +519,18 @@ export default function SignupPage() {
                         value={partnerForm.phoneNumber}
                         onChange={handlePartnerChange}
                         placeholder="20123456"
-                        className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                        className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                       />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("email")} <span className="text-destructive">*</span>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    {t("email")} <span className="text-red-400">*</span>
                   </label>
                   <div className="relative">
-                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     <input
@@ -539,17 +539,17 @@ export default function SignupPage() {
                       value={partnerForm.email}
                       onChange={handlePartnerChange}
                       placeholder="info@company.com"
-                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("address")} <span className="text-muted-foreground text-xs">({t("optional")})</span>
+                  <label className="block text-sm font-medium text-white mb-2">
+                    {t("address")} <span className="text-white/40 text-xs">({t("optional")})</span>
                   </label>
                   <div className="relative">
-                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -559,18 +559,18 @@ export default function SignupPage() {
                       value={partnerForm.address}
                       onChange={handlePartnerChange}
                       placeholder="Street, City, Country"
-                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      className="w-full h-12 pl-12 pr-4 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("password")} <span className="text-destructive">*</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("password")} <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
-                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                       <input
@@ -579,12 +579,12 @@ export default function SignupPage() {
                         value={partnerForm.password}
                         onChange={handlePartnerChange}
                         placeholder="Min 6 chars"
-                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                        className="w-full h-12 pl-12 pr-12 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition"
                       >
                         {showPassword ? (
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -600,11 +600,11 @@ export default function SignupPage() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      {t("repeatPassword")} <span className="text-destructive">*</span>
+                    <label className="block text-sm font-medium text-white mb-2">
+                      {t("repeatPassword")} <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
-                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                       <input
@@ -613,12 +613,12 @@ export default function SignupPage() {
                         value={partnerForm.repeatPassword}
                         onChange={handlePartnerChange}
                         placeholder="Repeat"
-                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                        className="w-full h-12 pl-12 pr-12 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-white placeholder:text-white/40"
                       />
                       <button
                         type="button"
                         onClick={() => setShowRepeatPassword(!showRepeatPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition"
                       >
                         {showRepeatPassword ? (
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -639,11 +639,11 @@ export default function SignupPage() {
 
             {/* Error Message */}
             {error && (
-              <div className="flex items-center gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-xl">
-                <svg className="w-5 h-5 text-destructive shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                <svg className="w-5 h-5 text-red-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <p className="text-sm text-destructive">{error}</p>
+                <p className="text-sm text-red-400">{error}</p>
               </div>
             )}
 
@@ -661,7 +661,7 @@ export default function SignupPage() {
 
           {/* Login Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-white/40">
               {t("alreadyHaveAccount")}{" "}
               <Link href="/login" className="font-medium text-primary hover:underline">
                 {t("login")}
