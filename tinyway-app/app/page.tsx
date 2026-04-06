@@ -60,7 +60,7 @@ export default function HomePage() {
     },
     {
       id: 4,
-      name: 'PlayStation 5',
+      name: "PlayStation 5",
       price: 599,
       badge: "Popular",
       shortInfo: "Gaming console for entertainment",
@@ -193,32 +193,35 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f5f5f5] text-black">
-      <div className="border-b border-black/10 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 text-xs text-black/60 md:px-6">
-          <div className="flex gap-4">
-            <Link href="/delivery" className="hover:text-black">
-              Delivery
-            </Link>
-            <Link href="/payment" className="hover:text-black">
-              Payment
-            </Link>
-            <Link href="/contacts" className="hover:text-black">
-              Customer Support
-            </Link>
-            <Link href="/returns" className="hover:text-black">
-              Returns
-            </Link>
+    <main className="min-h-screen bg-[#f7f7f8] text-slate-900">
+      <div className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 text-sm text-slate-600 md:flex-row md:items-center md:justify-between md:px-6">
+          <div className="flex flex-wrap items-center gap-4">
+            <span>Fast delivery across Europe</span>
+            <span className="hidden md:inline">•</span>
+            <span>Secure payments</span>
+            <span className="hidden md:inline">•</span>
+            <span>Simple returns</span>
           </div>
 
-          <div className="flex gap-4">
-            <span>LV</span>
-            <span>RU</span>
+          <div className="flex items-center gap-4 text-sm">
+            <Link href="/delivery" className="hover:text-slate-900">
+              Delivery
+            </Link>
+            <Link href="/payment" className="hover:text-slate-900">
+              Payment
+            </Link>
+            <Link href="/returns" className="hover:text-slate-900">
+              Returns
+            </Link>
+            <Link href="/contact-us" className="hover:text-slate-900">
+              Support
+            </Link>
           </div>
         </div>
       </div>
 
-      <header className="sticky top-0 z-40 border-b border-black/10 bg-white">
+      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto max-w-7xl px-4 py-4 md:px-6">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
@@ -226,20 +229,23 @@ export default function HomePage() {
                 <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
                   TinyWay.eu
                 </h1>
+                <p className="mt-1 text-sm text-slate-500">
+                  Easy shopping for everyday essentials
+                </p>
               </Link>
 
-              <div className="flex w-full max-w-3xl items-center overflow-hidden rounded-full border border-black/15 bg-[#f7f7f7]">
-                <button className="border-r border-black/10 px-5 py-3 text-sm font-medium">
+              <div className="flex w-full max-w-3xl items-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
+                <button className="hidden border-r border-slate-200 px-4 py-3 text-sm font-medium text-slate-700 md:block">
                   All Categories
                 </button>
 
                 <input
                   type="text"
-                  placeholder="Search for products, brands, categories..."
-                  className="w-full bg-transparent px-4 py-3 text-sm outline-none"
+                  placeholder="Search for products, brands or categories"
+                  className="w-full bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-slate-400"
                 />
 
-                <button className="bg-black px-6 py-3 text-sm font-medium text-white">
+                <button className="bg-slate-900 px-5 py-3.5 text-sm font-medium text-white transition hover:bg-slate-800">
                   Search
                 </button>
               </div>
@@ -248,15 +254,15 @@ export default function HomePage() {
                 {user ? (
                   <Link
                     href="/cabinet"
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-black transition hover:bg-black hover:text-white"
+                    className="flex h-11 min-w-[44px] items-center justify-center rounded-xl border border-slate-300 bg-white px-3 text-sm font-medium transition hover:border-slate-900 hover:text-slate-900"
                     title={user.email}
                   >
-                    👤
+                    Account
                   </Link>
                 ) : (
                   <Link
                     href="/login"
-                    className="rounded-full border border-black px-4 py-2 text-sm font-medium transition hover:bg-black hover:text-white"
+                    className="rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-medium transition hover:border-slate-900 hover:text-slate-900"
                   >
                     Login
                   </Link>
@@ -264,7 +270,7 @@ export default function HomePage() {
 
                 <Link
                   href="/cart"
-                  className="relative rounded-full bg-black px-5 py-2 text-sm font-medium text-white"
+                  className="relative rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800"
                 >
                   Cart
                   {cart.length > 0 && (
@@ -276,145 +282,158 @@ export default function HomePage() {
               </div>
             </div>
 
-            <nav className="flex flex-wrap gap-3 text-sm font-medium text-black/70">
-  <Link href="/" className="hover:text-black">
-    Home
-  </Link>
-  <Link href="/categories" className="hover:text-black">
-    Categories
-  </Link>
-  <Link href="/deals" className="hover:text-black">
-    Deals
-  </Link>
-  <Link href="/new-arrivals" className="hover:text-black">
-    New Arrivals
-  </Link>
-  <Link href="/best-sellers" className="hover:text-black">
-    Best Sellers
-  </Link>
-  <Link href="/contact-us" className="hover:text-black">
-    Contact Us
-  </Link>
-  <Link href="/my-account" className="hover:text-black">
-    My Account
-  </Link>
-</nav>
+            <nav className="flex flex-wrap gap-5 text-sm font-medium text-slate-600">
+              <Link href="/" className="hover:text-slate-900">
+                Home
+              </Link>
+              <Link href="/categories" className="hover:text-slate-900">
+                Categories
+              </Link>
+              <Link href="/deals" className="hover:text-slate-900">
+                Deals
+              </Link>
+              <Link href="/new-arrivals" className="hover:text-slate-900">
+                New Arrivals
+              </Link>
+              <Link href="/best-sellers" className="hover:text-slate-900">
+                Best Sellers
+              </Link>
+              <Link href="/contact-us" className="hover:text-slate-900">
+                Contact Us
+              </Link>
+              <Link href="/my-account" className="hover:text-slate-900">
+                My Account
+              </Link>
+            </nav>
           </div>
         </div>
       </header>
 
-      <div className="mx-auto max-w-7xl px-4 py-6 md:px-6">
-        <section className="mb-8 grid gap-6 lg:grid-cols-[260px_1fr]">
-          <aside className="rounded-2xl border border-black/10 bg-white p-4">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-black/50">
-              Categories
+      <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
+        <section className="grid gap-6 lg:grid-cols-[240px_1fr]">
+          <aside className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+              Shop by Category
             </h2>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {categories.map((category) => (
                 <Link
                   key={category.slug}
                   href={`/category/${category.slug}`}
-                  className="block rounded-xl px-3 py-3 text-sm transition hover:bg-[#f3f3f3]"
+                  className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
                 >
-                  {category.name}
+                  <span>{category.name}</span>
+                  <span className="text-slate-300">›</span>
                 </Link>
               ))}
             </div>
           </aside>
 
           <div className="space-y-6">
-            <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
-              <div className="relative overflow-hidden rounded-2xl bg-[#e9ecef]">
+            <section className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+              <div className="relative overflow-hidden rounded-3xl bg-slate-200 shadow-sm">
                 <img
                   src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1600&auto=format&fit=crop"
-                  alt="Hero"
-                  className="h-full min-h-[320px] w-full object-cover"
+                  alt="Featured shopping banner"
+                  className="h-full min-h-[380px] w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/30" />
-                <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                  <p className="mb-2 text-xs uppercase tracking-[0.3em] text-white/70">
-                    Marketplace
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/75 via-slate-900/40 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 text-white md:p-10">
+                  <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/70">
+                    Smart shopping, made simple
                   </p>
-                  <h2 className="max-w-2xl text-3xl font-bold md:text-5xl">
-                    Everything you need in one place
+                  <h2 className="max-w-2xl text-3xl font-bold leading-tight md:text-5xl">
+                    Everything your home, work and lifestyle need in one place
                   </h2>
-                  <p className="mt-3 max-w-xl text-white/85">
-                    Shop electronics, home goods, beauty, sports, furniture and
-                    more at great prices.
+                  <p className="mt-4 max-w-xl text-sm leading-6 text-white/85 md:text-base">
+                    Discover trusted products, clear prices and popular
+                    categories without the clutter.
                   </p>
 
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
-                      href="#products"
-                      className="rounded-full bg-white px-5 py-3 text-sm font-medium text-black"
+                      href="#best-sellers"
+                      className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
                     >
-                      Shop Now
+                      Shop Best Sellers
                     </Link>
                     <Link
-                      href="#deals"
-                      className="rounded-full border border-white/40 px-5 py-3 text-sm font-medium text-white"
+                      href="#categories-section"
+                      className="rounded-xl border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
                     >
-                      View Deals
+                      Browse Categories
                     </Link>
                   </div>
                 </div>
               </div>
 
               <div className="grid gap-6">
-                <div className="rounded-2xl bg-black p-6 text-white">
+                <div className="rounded-3xl bg-slate-900 p-6 text-white shadow-sm">
                   <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                    Best Deals Today
+                    This week’s top picks
                   </p>
-                  <h3 className="mt-3 text-2xl font-semibold">
-                    Top offers selected for you
+                  <h3 className="mt-3 text-2xl font-semibold leading-snug">
+                    Hand-picked deals customers love
                   </h3>
-                  <p className="mt-3 text-white/70">
-                    Save more on popular products this week.
+                  <p className="mt-3 text-sm leading-6 text-white/75">
+                    Save on popular products across electronics, home and
+                    lifestyle.
                   </p>
+                  <Link
+                    href="#deals"
+                    className="mt-5 inline-flex rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                  >
+                    View Deals
+                  </Link>
                 </div>
 
-                <div className="rounded-2xl border border-black/10 bg-white p-6">
-                  <p className="text-xs uppercase tracking-[0.3em] text-black/40">
-                    Shop by Need
+                <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                    Why customers choose us
                   </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-[#f3f3f3] px-4 py-2 text-sm">
-                      For Work
-                    </span>
-                    <span className="rounded-full bg-[#f3f3f3] px-4 py-2 text-sm">
-                      For Home
-                    </span>
-                    <span className="rounded-full bg-[#f3f3f3] px-4 py-2 text-sm">
-                      For Gaming
-                    </span>
-                    <span className="rounded-full bg-[#f3f3f3] px-4 py-2 text-sm">
-                      For Travel
-                    </span>
-                    <span className="rounded-full bg-[#f3f3f3] px-4 py-2 text-sm">
-                      For Fitness
-                    </span>
-                    <span className="rounded-full bg-[#f3f3f3] px-4 py-2 text-sm">
-                      For Kids
-                    </span>
+                  <div className="mt-4 grid gap-3 text-sm text-slate-700">
+                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                      Clear prices with no confusion
+                    </div>
+                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                      Easy category browsing
+                    </div>
+                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                      Fast and secure checkout
+                    </div>
+                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                      Helpful customer support
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
 
             <section
-              id="categories"
-              className="rounded-2xl border border-black/10 bg-white p-6"
+              id="categories-section"
+              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
             >
-              <div className="mb-6 flex items-center justify-between">
+              <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-black/40">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
                     Popular Categories
                   </p>
-                  <h2 className="mt-2 text-2xl font-bold">
-                    Find the products you need faster
+                  <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+                    Find what you need faster
                   </h2>
+                  <p className="mt-2 max-w-2xl text-sm text-slate-600 md:text-base">
+                    Start with the most popular sections to quickly reach the
+                    products you are looking for.
+                  </p>
                 </div>
+
+                <Link
+                  href="/categories"
+                  className="text-sm font-semibold text-slate-900 hover:underline"
+                >
+                  View all categories
+                </Link>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -422,7 +441,7 @@ export default function HomePage() {
                   <Link
                     key={category.slug}
                     href={`/category/${category.slug}`}
-                    className="group overflow-hidden rounded-2xl border border-black/10 bg-[#fafafa]"
+                    className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:shadow-md"
                   >
                     <img
                       src={category.image}
@@ -430,7 +449,12 @@ export default function HomePage() {
                       className="h-36 w-full object-cover transition duration-300 group-hover:scale-105"
                     />
                     <div className="p-4">
-                      <h3 className="text-sm font-semibold">{category.name}</h3>
+                      <h3 className="text-base font-semibold text-slate-900">
+                        {category.name}
+                      </h3>
+                      <p className="mt-1 text-sm text-slate-500">
+                        Explore products in this category
+                      </p>
                     </div>
                   </Link>
                 ))}
@@ -439,31 +463,70 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Fast delivery
+            </p>
+            <p className="mt-1 text-sm text-slate-600">
+              Quick dispatch and reliable shipping updates.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Secure payment
+            </p>
+            <p className="mt-1 text-sm text-slate-600">
+              Safe checkout with trusted payment methods.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              Easy returns
+            </p>
+            <p className="mt-1 text-sm text-slate-600">
+              Clear return policy and helpful support when needed.
+            </p>
+          </div>
+        </section>
+
         <section
           id="deals"
-          className="mb-8 rounded-2xl border border-black/10 bg-white p-6"
+          className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
         >
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-black/40">
-              Best Deals Today
-            </p>
-            <h2 className="mt-2 text-2xl font-bold">
-              Top offers selected for you
-            </h2>
+          <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                Best Deals Today
+              </p>
+              <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+                Save on selected favorites
+              </h2>
+              <p className="mt-2 text-sm text-slate-600 md:text-base">
+                Great prices on products customers check most often.
+              </p>
+            </div>
+
+            <Link
+              href="/deals"
+              className="text-sm font-semibold text-slate-900 hover:underline"
+            >
+              See all deals
+            </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.slice(0, 3).map((product) => (
               <div
                 key={product.id}
-                className="rounded-2xl border border-black/10 bg-white p-4"
+                className="rounded-2xl border border-slate-200 bg-white p-4 transition hover:shadow-md"
               >
-                <div className="mb-3 inline-flex rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-600">
+                <div className="mb-3 inline-flex rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">
                   {product.badge || "Sale"}
                 </div>
 
                 <Link href={`/product/${product.id}`} className="block">
-                  <div className="overflow-hidden rounded-xl bg-[#f5f5f5]">
+                  <div className="overflow-hidden rounded-2xl bg-slate-100">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -472,17 +535,21 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-4">
-                    <h3 className="text-lg font-semibold">{product.name}</h3>
-                    <p className="mt-2 text-sm text-black/60">
+                    <h3 className="text-lg font-semibold text-slate-900">
+                      {product.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
                       {product.shortInfo}
                     </p>
-                    <p className="mt-3 text-2xl font-bold">€{product.price}</p>
+                    <p className="mt-4 text-2xl font-bold text-slate-900">
+                      €{product.price}
+                    </p>
                   </div>
                 </Link>
 
                 <button
                   onClick={() => addToCart(product)}
-                  className="mt-4 w-full rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                  className="mt-4 w-full rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
                 >
                   Add to Cart
                 </button>
@@ -493,29 +560,41 @@ export default function HomePage() {
 
         <section
           id="new-arrivals"
-          className="mb-8 rounded-2xl border border-black/10 bg-white p-6"
+          className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
         >
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-black/40">
-              New Arrivals
-            </p>
-            <h2 className="mt-2 text-2xl font-bold">
-              Latest products added to the store
-            </h2>
+          <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                New Arrivals
+              </p>
+              <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+                Latest products in store
+              </h2>
+              <p className="mt-2 text-sm text-slate-600 md:text-base">
+                Fresh additions for work, home and entertainment.
+              </p>
+            </div>
+
+            <Link
+              href="/new-arrivals"
+              className="text-sm font-semibold text-slate-900 hover:underline"
+            >
+              View all new arrivals
+            </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.slice(1, 4).map((product) => (
               <div
                 key={product.id}
-                className="rounded-2xl border border-black/10 bg-white p-4"
+                className="rounded-2xl border border-slate-200 bg-white p-4 transition hover:shadow-md"
               >
-                <div className="mb-3 inline-flex rounded-full bg-black px-3 py-1 text-xs font-semibold text-white">
+                <div className="mb-3 inline-flex rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
                   New
                 </div>
 
                 <Link href={`/product/${product.id}`} className="block">
-                  <div className="overflow-hidden rounded-xl bg-[#f5f5f5]">
+                  <div className="overflow-hidden rounded-2xl bg-slate-100">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -524,20 +603,24 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-4">
-                    <h3 className="text-lg font-semibold">{product.name}</h3>
-                    <p className="mt-2 text-sm text-black/60">
+                    <h3 className="text-lg font-semibold text-slate-900">
+                      {product.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
                       {product.shortInfo}
                     </p>
-                    <p className="mt-3 text-2xl font-bold">€{product.price}</p>
+                    <p className="mt-4 text-2xl font-bold text-slate-900">
+                      €{product.price}
+                    </p>
                   </div>
                 </Link>
 
-                <button
-                  onClick={() => addToCart(product)}
-                  className="mt-4 w-full rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                <Link
+                  href={`/product/${product.id}`}
+                  className="mt-4 block w-full rounded-xl border border-slate-300 px-5 py-3 text-center text-sm font-semibold text-slate-900 transition hover:border-slate-900"
                 >
                   View Product
-                </button>
+                </Link>
               </div>
             ))}
           </div>
@@ -545,25 +628,37 @@ export default function HomePage() {
 
         <section
           id="best-sellers"
-          className="mb-8 rounded-2xl border border-black/10 bg-white p-6"
+          className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
         >
-          <div className="mb-6">
-            <p className="text-xs uppercase tracking-[0.3em] text-black/40">
-              Best Sellers
-            </p>
-            <h2 className="mt-2 text-2xl font-bold">
-              Most popular products this week
-            </h2>
+          <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                Best Sellers
+              </p>
+              <h2 className="mt-2 text-2xl font-bold md:text-3xl">
+                Most popular products this week
+              </h2>
+              <p className="mt-2 text-sm text-slate-600 md:text-base">
+                Trusted picks customers return to again and again.
+              </p>
+            </div>
+
+            <Link
+              href="/best-sellers"
+              className="text-sm font-semibold text-slate-900 hover:underline"
+            >
+              Browse all best sellers
+            </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <div
                 key={product.id}
-                className="group rounded-2xl border border-black/10 bg-white p-4 transition hover:shadow-lg"
+                className="group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <Link href={`/product/${product.id}`} className="block">
-                  <div className="overflow-hidden rounded-xl bg-[#f5f5f5]">
+                  <div className="overflow-hidden rounded-2xl bg-slate-100">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -572,20 +667,24 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-4">
-                    <div className="mb-2 inline-flex rounded-full bg-[#f3f3f3] px-3 py-1 text-xs font-medium text-black/70">
+                    <div className="mb-2 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
                       {product.badge || "Popular"}
                     </div>
-                    <h3 className="text-lg font-semibold">{product.name}</h3>
-                    <p className="mt-2 text-sm text-black/60">
+                    <h3 className="text-lg font-semibold text-slate-900">
+                      {product.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
                       {product.shortInfo}
                     </p>
-                    <p className="mt-3 text-2xl font-bold">€{product.price}</p>
+                    <p className="mt-4 text-2xl font-bold text-slate-900">
+                      €{product.price}
+                    </p>
                   </div>
                 </Link>
 
                 <button
                   onClick={() => addToCart(product)}
-                  className="mt-4 w-full rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                  className="mt-4 w-full rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
                 >
                   Add to Cart
                 </button>
@@ -594,45 +693,52 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-black/10 bg-white p-6">
+        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-black/40">
-                Need Help Choosing?
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                Need help choosing?
               </p>
-              <h2 className="mt-2 text-2xl font-bold">
+              <h2 className="mt-2 text-2xl font-bold md:text-3xl">
                 Browse by category, compare products, and find the right item
-                faster.
+                faster
               </h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 md:text-base">
+                We designed the store to be simple and readable, so customers
+                can find products quickly and shop with confidence.
+              </p>
+
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
-                  href="#categories"
-                  className="rounded-full bg-black px-5 py-3 text-sm font-medium text-white"
+                  href="/categories"
+                  className="rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
                 >
                   View All Categories
                 </Link>
                 <Link
-                  href="/contacts"
-                  className="rounded-full border border-black px-5 py-3 text-sm font-medium"
+                  href="/contact-us"
+                  className="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-900"
                 >
                   Contact Support
                 </Link>
               </div>
             </div>
 
-            <div className="rounded-2xl bg-[#f7f7f7] p-6">
-              <h3 className="text-lg font-semibold">Useful Links</h3>
-              <div className="mt-4 grid gap-3 text-sm text-black/70">
-                <Link href="/delivery" className="hover:text-black">
+            <div className="rounded-3xl bg-slate-50 p-6">
+              <h3 className="text-lg font-semibold text-slate-900">
+                Useful Links
+              </h3>
+              <div className="mt-4 grid gap-3 text-sm text-slate-600">
+                <Link href="/delivery" className="hover:text-slate-900">
                   Delivery Information
                 </Link>
-                <Link href="/payment" className="hover:text-black">
+                <Link href="/payment" className="hover:text-slate-900">
                   Payment Methods
                 </Link>
-                <Link href="/returns" className="hover:text-black">
+                <Link href="/returns" className="hover:text-slate-900">
                   Returns & Refunds
                 </Link>
-                <Link href="/contacts" className="hover:text-black">
+                <Link href="/contact-us" className="hover:text-slate-900">
                   Customer Support
                 </Link>
               </div>
