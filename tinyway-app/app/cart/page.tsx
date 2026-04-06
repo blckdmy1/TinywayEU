@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
+import { useI18n } from '@/lib/i18n';
 
 type CartItem = {
   id: string | number;
@@ -17,6 +18,7 @@ type CartItem = {
 const CART_KEY = 'cart';
 
 export default function CartPage() {
+  const { t } = useI18n();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -79,8 +81,8 @@ export default function CartPage() {
   if (!isLoaded) {
     return (
       <main className="mx-auto max-w-6xl px-4 py-10 bg-background text-foreground min-h-screen">
-        <h1 className="mb-6 text-3xl font-bold">Cart</h1>
-        <p className="text-muted-foreground">Loading cart...</p>
+        <h1 className="mb-6 text-3xl font-bold">{t("cartTitle")}</h1>
+        <p className="text-muted-foreground">{t("loadingCart")}</p>
       </main>
     );
   }
@@ -88,30 +90,30 @@ export default function CartPage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 bg-background text-foreground min-h-screen">
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-3xl font-bold">Cart</h1>
+        <h1 className="text-3xl font-bold">{t("cartTitle")}</h1>
 
         {cartItems.length > 0 && (
           <button
             onClick={clearCart}
             className="w-fit rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-2 text-sm font-medium text-destructive transition hover:bg-destructive/20"
           >
-            Clear cart
+            {t("clearCart")}
           </button>
         )}
       </div>
 
       {cartItems.length === 0 ? (
         <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
-          <h2 className="mb-2 text-xl font-semibold">Your cart is empty</h2>
+          <h2 className="mb-2 text-xl font-semibold">{t("emptyCart")}</h2>
           <p className="mb-6 text-muted-foreground">
-            Looks like you have not added any products yet.
+            {t("noProductsYet")}
           </p>
 
           <Link
             href="/"
             className="inline-block rounded-lg bg-primary px-5 py-3 font-medium text-primary-foreground transition hover:opacity-90"
           >
-            Continue shopping
+            {t("continueShopping")}
           </Link>
         </div>
       ) : (
@@ -148,7 +150,7 @@ export default function CartPage() {
                         </Link>
 
                         <p className="mt-2 text-sm text-muted-foreground">
-                          Price: €{item.price.toFixed(2)}
+                          {t("price")}: €{item.price.toFixed(2)}
                         </p>
                       </div>
 
@@ -182,7 +184,7 @@ export default function CartPage() {
                             onClick={() => removeItem(item.id)}
                             className="text-sm font-medium text-destructive hover:underline"
                           >
-                            Remove
+                            {t("remove")}
                           </button>
                         </div>
                       </div>
@@ -194,41 +196,41 @@ export default function CartPage() {
           </div>
 
           <aside className="h-fit rounded-2xl border border-border bg-card p-6 shadow-sm">
-            <h2 className="mb-4 text-xl font-semibold">Order summary</h2>
+            <h2 className="mb-4 text-xl font-semibold">{t("orderSummary")}</h2>
 
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Items</span>
+                <span className="text-muted-foreground">{t("items")}</span>
                 <span>{totalItems}</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Subtotal</span>
+                <span className="text-muted-foreground">{t("subtotal")}</span>
                 <span>€{totalPrice.toFixed(2)}</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Delivery</span>
-                <span>Free</span>
+                <span className="text-muted-foreground">{t("delivery")}</span>
+                <span>{t("free")}</span>
               </div>
             </div>
 
             <div className="my-5 border-t border-border" />
 
             <div className="mb-6 flex items-center justify-between text-lg font-bold">
-              <span>Total</span>
+              <span>{t("total")}</span>
               <span>€{totalPrice.toFixed(2)}</span>
             </div>
 
             <button className="w-full rounded-lg bg-primary px-5 py-3 font-medium text-primary-foreground transition hover:opacity-90">
-              Checkout
+              {t("checkout")}
             </button>
 
             <Link
               href="/"
               className="mt-3 block text-center text-sm text-primary hover:underline"
             >
-              Continue shopping
+              {t("continueShopping")}
             </Link>
           </aside>
         </div>

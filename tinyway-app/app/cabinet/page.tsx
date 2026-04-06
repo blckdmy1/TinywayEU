@@ -3,6 +3,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useI18n } from "@/lib/i18n";
 
 type User = {
   email: string;
@@ -56,6 +57,7 @@ const defaultProfile: UserProfile = {
 
 export default function CabinetPage() {
   const router = useRouter();
+  const { t } = useI18n();
 
   const [checkedAuth, setCheckedAuth] = useState(false);
   const [activeSection, setActiveSection] =
@@ -296,7 +298,7 @@ export default function CabinetPage() {
           </div>
 
           <div className="rounded-[2rem] border border-border bg-muted p-8 text-center">
-            <p className="text-lg text-muted-foreground">Checking your account...</p>
+            <p className="text-lg text-muted-foreground">{t("checkingAccount")}</p>
           </div>
         </div>
       </main>
@@ -317,7 +319,7 @@ export default function CabinetPage() {
               TinyWay.eu
             </p>
             <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-              My Cabinet
+              {t("myCabinet")}
             </h1>
           </div>
 
@@ -326,14 +328,14 @@ export default function CabinetPage() {
               href="/"
               className="rounded-full border border-border px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-primary hover:text-primary-foreground hover:border-primary"
             >
-              Home
+              {t("home")}
             </Link>
 
             <button
               onClick={handleLogout}
               className="rounded-full bg-primary px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
             >
-              Logout
+              {t("logout")}
             </button>
           </nav>
         </header>
@@ -350,7 +352,7 @@ export default function CabinetPage() {
                   />
                 ) : (
                   <span className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60">
-                    No photo
+                    {t("noPhoto")}
                   </span>
                 )}
               </div>
@@ -358,41 +360,41 @@ export default function CabinetPage() {
               <p className="text-lg font-medium">
                 {profile.name || profile.surname
                   ? `${profile.name} ${profile.surname}`.trim()
-                  : "Your Profile"}
+                  : t("yourProfile")}
               </p>
               <p className="mt-1 text-sm text-primary-foreground/60">
-                {profile.email || "No email"}
+                {profile.email || t("noEmail")}
               </p>
             </div>
 
             <div className="space-y-3">
               <MenuButton
-                label="Account information"
+                label={t("accountInfo")}
                 isActive={activeSection === "account"}
                 onClick={() => setActiveSection("account")}
               />
 
               <MenuButton
-                label="Delivery address"
+                label={t("deliveryAddress")}
                 isActive={activeSection === "delivery"}
                 onClick={() => setActiveSection("delivery")}
               />
 
               <MenuButton
-                label="Settings"
+                label={t("settings")}
                 isActive={activeSection === "settings"}
                 onClick={() => setActiveSection("settings")}
               />
 
               <MenuButton
-                label="Liked goods"
+                label={t("likedProducts")}
                 isActive={activeSection === "liked"}
                 onClick={() => setActiveSection("liked")}
               />
 
               {userType === "partner" && (
                 <MenuButton
-                  label="My goods"
+                  label={t("myGoods")}
                   isActive={activeSection === "goods"}
                   onClick={() => setActiveSection("goods")}
                 />
@@ -404,10 +406,10 @@ export default function CabinetPage() {
             {activeSection === "account" && (
               <div>
                 <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-                  Account Information
+                  {t("accountInfo")}
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
-                  Your profile
+                  {t("yourProfile")}
                 </h2>
 
                 <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -436,19 +438,19 @@ export default function CabinetPage() {
             {activeSection === "delivery" && (
               <div>
                 <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-                  Delivery Address
+                  {t("deliveryAddress")}
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
-                  Delivery details
+                  {t("deliveryDetails")}
                 </h2>
 
                 <div className="mt-8 rounded-[1.5rem] border border-border bg-card p-6">
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    Current delivery address
+                    {t("currentDeliveryAddress")}
                   </p>
                   <p className="mt-3 text-lg text-foreground/70">
                     {profile.deliveryAddress ||
-                      "You have not added a delivery address yet."}
+                      t("noDeliveryAddress")}
                   </p>
                 </div>
 
@@ -457,7 +459,7 @@ export default function CabinetPage() {
                     onClick={() => setActiveSection("settings")}
                     className="rounded-full bg-primary px-6 py-3 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                   >
-                    Change address
+                    {t("changeAddress")}
                   </button>
                 </div>
               </div>
@@ -466,16 +468,16 @@ export default function CabinetPage() {
             {activeSection === "settings" && (
               <div>
                 <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-                  Settings
+                  {t("settings")}
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
-                  Change your information
+                  {t("changeYourInfo")}
                 </h2>
 
                 <div className="mt-8 grid gap-6 lg:grid-cols-[220px_1fr]">
                   <div className="rounded-[1.5rem] border border-primary bg-primary p-6 text-primary-foreground">
                     <p className="mb-4 text-xs uppercase tracking-[0.35em] text-primary-foreground/60">
-                      Profile Photo
+                      {t("profilePhoto")}
                     </p>
 
                     <div className="mb-6 flex justify-center">
@@ -487,13 +489,13 @@ export default function CabinetPage() {
                         />
                       ) : (
                         <div className="flex h-28 w-28 items-center justify-center rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-xs uppercase tracking-[0.2em] text-primary-foreground/60">
-                          No Photo
+                          {t("noPhoto")}
                         </div>
                       )}
                     </div>
 
                     <label className="block cursor-pointer rounded-full border border-primary-foreground/20 px-4 py-3 text-center text-xs font-medium uppercase tracking-[0.2em] transition hover:bg-card hover:text-foreground">
-                      Upload Photo
+                      {t("uploadPhoto")}
                       <input
                         type="file"
                         accept="image/*"
@@ -559,7 +561,7 @@ export default function CabinetPage() {
                         onClick={handleSaveProfile}
                         className="rounded-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                       >
-                        Save changes
+                        {t("saveChanges")}
                       </button>
 
                       {saveMessage && (
@@ -574,16 +576,16 @@ export default function CabinetPage() {
             {activeSection === "liked" && (
               <div>
                 <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-                  Saved Goods
+                  {t("savedGoods")}
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
-                  Liked products
+                  {t("likedProducts")}
                 </h2>
 
                 <div className="mt-8 space-y-4">
                   {likedItems.length === 0 ? (
                     <div className="rounded-[1.5rem] border border-border bg-card p-6 text-muted-foreground">
-                      You have no liked products yet.
+                      {t("noLikedProducts")}
                     </div>
                   ) : (
                     likedItems.map((item) => (
@@ -616,7 +618,7 @@ export default function CabinetPage() {
                           onClick={() => removeLikedItem(item.id)}
                           className="rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:bg-destructive hover:text-primary-foreground hover:border-destructive"
                         >
-                          Remove
+                          {t("remove")}
                         </button>
                       </div>
                     ))

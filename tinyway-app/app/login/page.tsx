@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n";
 
 type StoredUser = {
   email: string;
@@ -16,6 +17,7 @@ type LoggedUser = {
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useI18n();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -106,7 +108,7 @@ export default function LoginPage() {
               TinyWay.eu
             </p>
             <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-              Login
+              {t("login")}
             </h1>
           </div>
 
@@ -115,7 +117,7 @@ export default function LoginPage() {
               href="/"
               className="rounded-full border border-border px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-primary hover:text-primary-foreground hover:border-primary"
             >
-              Back to home
+              {t("backToHome")}
             </Link>
           </nav>
         </header>
@@ -124,23 +126,22 @@ export default function LoginPage() {
           <div className="flex min-h-[560px] flex-col justify-between rounded-[2rem] border border-primary bg-primary p-8 text-primary-foreground md:p-12">
             <div>
               <p className="mb-6 text-xs uppercase tracking-[0.45em] text-primary-foreground/60">
-                Welcome Back
+                {t("welcomeBack")}
               </p>
               <h2 className="max-w-xl text-4xl font-semibold leading-tight md:text-6xl">
-                Sign in to your TinyWay account
+                {t("signInToAccount")}
               </h2>
               <p className="mt-6 max-w-lg text-base leading-7 text-primary-foreground/70 md:text-lg">
-                Login with your email and password to access your personal
-                cabinet.
+                {t("loginWithEmail")}
               </p>
             </div>
 
             <div className="rounded-[1.5rem] border border-primary-foreground/15 bg-primary-foreground/5 p-5">
               <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/50">
-                New here?
+                {t("newHere")}
               </p>
               <p className="mt-2 text-lg font-medium">
-                Create an account in a few seconds.
+                {t("createAccountSeconds")}
               </p>
             </div>
           </div>
@@ -149,10 +150,10 @@ export default function LoginPage() {
             <div className="w-full">
               <div className="mb-8">
                 <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-                  Account Access
+                  {t("accountAccess")}
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
-                  Login to continue
+                  {t("loginToContinue")}
                 </h2>
               </div>
 
@@ -162,7 +163,7 @@ export default function LoginPage() {
                     htmlFor="email"
                     className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground"
                   >
-                    Email
+                    {t("email")}
                   </label>
                   <input
                     id="email"
@@ -179,7 +180,7 @@ export default function LoginPage() {
                     htmlFor="password"
                     className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground"
                   >
-                    Password
+                    {t("password")}
                   </label>
                   <input
                     id="password"
@@ -201,15 +202,15 @@ export default function LoginPage() {
                   type="submit"
                   className="w-full rounded-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                 >
-                  Login
+                  {t("login")}
                 </button>
               </form>
 
               <div className="mt-6 text-center">
                 <p className="text-sm text-muted-foreground">
-                  Do not have an account?{" "}
+                  {t("noAccount")}{" "}
                   <Link href="/signup" className="font-medium text-primary underline">
-                    Sign up
+                    {t("signUp")}
                   </Link>
                 </p>
               </div>
@@ -218,16 +219,16 @@ export default function LoginPage() {
         </section>
 
         <footer className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>© 2026 TinyWay.eu</p>
+          <p>{t("copyright")}</p>
           <div className="flex gap-6">
             <Link href="/" className="hover:text-foreground">
-              Home
+              {t("home")}
             </Link>
             <Link href="/login" className="hover:text-foreground">
-              Login
+              {t("login")}
             </Link>
             <Link href="/signup" className="hover:text-foreground">
-              Sign up
+              {t("signUp")}
             </Link>
           </div>
         </footer>

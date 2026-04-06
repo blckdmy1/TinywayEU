@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useI18n, languages, Language } from "@/lib/i18n";
 
 type Product = {
   id: number;
@@ -30,6 +31,8 @@ type LoggedUser = {
 };
 
 export default function HomePage() {
+  const { t, language, setLanguage } = useI18n();
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const products: Product[] = [
     {
       id: 1,
@@ -207,27 +210,27 @@ export default function HomePage() {
 
             {/* Deliver To */}
             <Link href="/delivery" className="hidden md:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-              <span className="text-xs text-primary-foreground/70">Deliver to</span>
+              <span className="text-xs text-primary-foreground/70">{t("deliverTo")}</span>
               <span className="text-sm font-semibold flex items-center gap-1">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                Europe
+                {t("europe")}
               </span>
             </Link>
 
             {/* Search Bar */}
             <div className="flex flex-1 max-w-3xl">
               <select className="hidden md:block bg-muted text-foreground text-xs px-3 py-2.5 rounded-l-xl border-r border-border outline-none cursor-pointer">
-                <option>All Categories</option>
+                <option>{t("allCategories")}</option>
                 {categories.slice(0, 8).map((cat) => (
                   <option key={cat.slug}>{cat.name}</option>
                 ))}
               </select>
               <input
                 type="text"
-                placeholder="Search products, brands, categories..."
+                placeholder={t("searchPlaceholder")}
                 className="w-full px-4 py-2.5 text-sm text-foreground bg-card outline-none md:rounded-none rounded-l-xl placeholder:text-muted-foreground"
               />
               <button className="bg-primary-foreground hover:bg-primary-foreground/90 px-4 py-2.5 rounded-r-xl transition">
@@ -237,16 +240,49 @@ export default function HomePage() {
               </button>
             </div>
 
+            {/* Language Selector */}
+            <div className="relative">
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
+              >
+                <span className="text-sm font-semibold">{languages.find(l => l.code === language)?.flag}</span>
+                <span className="text-sm font-semibold">{language.toUpperCase()}</span>
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {langMenuOpen && (
+                <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-xl shadow-lg py-2 min-w-[160px] z-50">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code as Language);
+                        setLangMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-muted transition flex items-center gap-2 ${
+                        language === lang.code ? "bg-muted font-semibold" : ""
+                      }`}
+                    >
+                      <span>{lang.flag}</span>
+                      <span className="text-foreground">{lang.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Account */}
             <Link
               href={user ? "/cabinet" : "/login"}
               className="hidden sm:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
             >
               <span className="text-xs text-primary-foreground/70">
-                {user ? `Hello, ${user.email.split("@")[0]}` : "Hello, sign in"}
+                {user ? `${t("hello")}, ${user.email.split("@")[0]}` : t("helloSignIn")}
               </span>
               <span className="text-sm font-semibold flex items-center gap-1">
-                Account
+                {t("account")}
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -258,8 +294,8 @@ export default function HomePage() {
               href="/cabinet"
               className="hidden lg:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
             >
-              <span className="text-xs text-primary-foreground/70">Returns</span>
-              <span className="text-sm font-semibold">& Orders</span>
+              <span className="text-xs text-primary-foreground/70">{t("returns")}</span>
+              <span className="text-sm font-semibold">{t("orders")}</span>
             </Link>
 
             {/* Cart */}
@@ -275,7 +311,7 @@ export default function HomePage() {
                   {cart.length}
                 </span>
               </div>
-              <span className="hidden sm:block text-sm font-semibold">Cart</span>
+              <span className="hidden sm:block text-sm font-semibold">{t("cart")}</span>
             </Link>
           </div>
         </div>
@@ -288,31 +324,31 @@ export default function HomePage() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
-                All Categories
+                {t("allCategories")}
               </button>
               <Link href="/deals" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                Today&apos;s Deals
+                {t("todaysDeals")}
               </Link>
               <Link href="/best-sellers" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                Best Sellers
+                {t("bestSellers")}
               </Link>
               <Link href="/new-arrivals" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                New Arrivals
+                {t("newArrivals")}
               </Link>
               <Link href="/category/phones" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                Phones
+                {t("phones")}
               </Link>
               <Link href="/category/computers" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                Computers
+                {t("computers")}
               </Link>
               <Link href="/category/tv-audio" className="hidden md:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                TV & Audio
+                {t("tvAudio")}
               </Link>
               <Link href="/category/gaming" className="hidden md:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                Gaming
+                {t("gaming")}
               </Link>
               <Link href="/contact-us" className="hidden lg:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                Help & Support
+                {t("helpSupport")}
               </Link>
             </nav>
           </div>
@@ -323,7 +359,7 @@ export default function HomePage() {
         <section className="grid gap-6 lg:grid-cols-[240px_1fr]">
           <aside className="rounded-3xl border border-border bg-card p-5 shadow-sm">
             <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Shop by Category
+              {t("shopByCategory")}
             </h2>
 
             <div className="space-y-1.5">
@@ -381,39 +417,38 @@ export default function HomePage() {
               <div className="grid gap-6">
 <div className="rounded-3xl bg-primary p-6 text-primary-foreground shadow-sm">
                   <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60">
-                    This week&apos;s top picks
+                    {t("thisWeeksTopPicks")}
                   </p>
                   <h3 className="mt-3 text-2xl font-semibold leading-snug">
-                    Hand-picked deals customers love
+                    {t("handPickedDeals")}
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-primary-foreground/75">
-                    Save on popular products across electronics, home and
-                    lifestyle.
+                    {t("saveOnPopularProducts")}
                   </p>
                   <Link
                     href="#deals"
                     className="mt-5 inline-flex rounded-xl bg-card px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-muted"
                   >
-                    View Deals
+                    {t("viewDeals")}
                   </Link>
                 </div>
 
                 <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    Why customers choose us
+                    {t("whyCustomersChooseUs")}
                   </p>
                   <div className="mt-4 grid gap-3 text-sm text-foreground/80">
                     <div className="rounded-2xl bg-muted px-4 py-3">
-                      Clear prices with no confusion
+                      {t("clearPrices")}
                     </div>
                     <div className="rounded-2xl bg-muted px-4 py-3">
-                      Easy category browsing
+                      {t("easyBrowsing")}
                     </div>
                     <div className="rounded-2xl bg-muted px-4 py-3">
-                      Fast and secure checkout
+                      {t("fastCheckout")}
                     </div>
                     <div className="rounded-2xl bg-muted px-4 py-3">
-                      Helpful customer support
+                      {t("helpfulSupport")}
                     </div>
                   </div>
                 </div>
@@ -427,14 +462,13 @@ export default function HomePage() {
               <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    Popular Categories
+                    {t("popularCategories")}
                   </p>
                   <h2 className="mt-2 text-2xl font-bold md:text-3xl">
-                    Find what you need faster
+                    {t("findWhatYouNeed")}
                   </h2>
                   <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
-                    Start with the most popular sections to quickly reach the
-                    products you are looking for.
+                    {t("startWithPopular")}
                   </p>
                 </div>
 
@@ -442,7 +476,7 @@ export default function HomePage() {
                   href="/categories"
                   className="text-sm font-semibold text-primary hover:underline"
                 >
-                  View all categories
+                  {t("viewAllCategories")}
                 </Link>
               </div>
 
@@ -463,7 +497,7 @@ export default function HomePage() {
                         {category.name}
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        Explore products in this category
+                        {t("exploreProducts")}
                       </p>
                     </div>
                   </Link>
@@ -476,26 +510,26 @@ export default function HomePage() {
         <section className="mt-8 grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
             <p className="text-sm font-semibold text-foreground">
-              Fast delivery
+              {t("fastDelivery")}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              Quick dispatch and reliable shipping updates.
+              {t("fastDeliveryDesc")}
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
             <p className="text-sm font-semibold text-foreground">
-              Secure payment
+              {t("securePayment")}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              Safe checkout with trusted payment methods.
+              {t("securePaymentDesc")}
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
             <p className="text-sm font-semibold text-foreground">
-              Easy returns
+              {t("easyReturns")}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              Clear return policy and helpful support when needed.
+              {t("easyReturnsDesc")}
             </p>
           </div>
         </section>
@@ -507,13 +541,13 @@ export default function HomePage() {
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                Best Deals Today
+                {t("bestDealsToday")}
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
-                Save on selected favorites
+                {t("saveOnFavorites")}
               </h2>
               <p className="mt-2 text-sm text-muted-foreground md:text-base">
-                Great prices on products customers check most often.
+                {t("greatPrices")}
               </p>
             </div>
 
@@ -521,7 +555,7 @@ export default function HomePage() {
               href="/deals"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              See all deals
+              {t("seeAllDeals")}
             </Link>
           </div>
 
@@ -532,7 +566,7 @@ export default function HomePage() {
                 className="rounded-2xl border border-border bg-card p-4 transition hover:shadow-md"
               >
                 <div className="mb-3 inline-flex rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-accent-foreground">
-                  {product.badge || "Sale"}
+                  {product.badge || t("sale")}
                 </div>
 
                 <Link href={`/product/${product.id}`} className="block">
@@ -561,7 +595,7 @@ export default function HomePage() {
                   onClick={() => addToCart(product)}
                   className="mt-4 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
                 >
-                  Add to Cart
+                  {t("addToCart")}
                 </button>
               </div>
             ))}
@@ -575,13 +609,13 @@ export default function HomePage() {
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                New Arrivals
+                {t("newArrivals")}
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
-                Latest products in store
+                {t("latestProducts")}
               </h2>
               <p className="mt-2 text-sm text-muted-foreground md:text-base">
-                Fresh additions for work, home and entertainment.
+                {t("freshAdditions")}
               </p>
             </div>
 
@@ -589,7 +623,7 @@ export default function HomePage() {
               href="/new-arrivals"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              View all new arrivals
+              {t("viewAllNewArrivals")}
             </Link>
           </div>
 
@@ -600,7 +634,7 @@ export default function HomePage() {
                 className="rounded-2xl border border-border bg-card p-4 transition hover:shadow-md"
               >
                 <div className="mb-3 inline-flex rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-                  New
+                  {t("new")}
                 </div>
 
                 <Link href={`/product/${product.id}`} className="block">
@@ -629,7 +663,7 @@ export default function HomePage() {
                   href={`/product/${product.id}`}
                   className="mt-4 block w-full rounded-xl border border-border px-5 py-3 text-center text-sm font-semibold text-foreground transition hover:border-primary"
                 >
-                  View Product
+                  {t("viewProduct")}
                 </Link>
               </div>
             ))}
@@ -643,13 +677,13 @@ export default function HomePage() {
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                Best Sellers
+                {t("bestSellers")}
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
-                Most popular products this week
+                {t("mostPopularWeek")}
               </h2>
               <p className="mt-2 text-sm text-muted-foreground md:text-base">
-                Trusted picks customers return to again and again.
+                {t("trustedPicks")}
               </p>
             </div>
 
@@ -657,7 +691,7 @@ export default function HomePage() {
               href="/best-sellers"
               className="text-sm font-semibold text-primary hover:underline"
             >
-              Browse all best sellers
+              {t("browseAllBestSellers")}
             </Link>
           </div>
 
@@ -678,7 +712,7 @@ export default function HomePage() {
 
                   <div className="pt-4">
                     <div className="mb-2 inline-flex rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
-                      {product.badge || "Popular"}
+                      {product.badge || t("popular")}
                     </div>
                     <h3 className="text-lg font-semibold text-foreground">
                       {product.name}
@@ -696,7 +730,7 @@ export default function HomePage() {
                   onClick={() => addToCart(product)}
                   className="mt-4 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
                 >
-                  Add to Cart
+                  {t("addToCart")}
                 </button>
               </div>
             ))}
@@ -707,15 +741,13 @@ export default function HomePage() {
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                Need help choosing?
+                {t("needHelpChoosing")}
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
-                Browse by category, compare products, and find the right item
-                faster
+                {t("browseByCategory")}
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground md:text-base">
-                We designed the store to be simple and readable, so customers
-                can find products quickly and shop with confidence.
+                {t("simpleReadable")}
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
@@ -723,33 +755,33 @@ export default function HomePage() {
                   href="/categories"
                   className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
                 >
-                  View All Categories
+                  {t("viewAllCategories")}
                 </Link>
                 <Link
                   href="/contact-us"
                   className="rounded-xl border border-border px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary"
                 >
-                  Contact Support
+                  {t("contactSupport")}
                 </Link>
               </div>
             </div>
 
             <div className="rounded-3xl bg-muted p-6">
               <h3 className="text-lg font-semibold text-foreground">
-                Useful Links
+                {t("usefulLinks")}
               </h3>
               <div className="mt-4 grid gap-3 text-sm text-muted-foreground">
                 <Link href="/delivery" className="hover:text-foreground">
-                  Delivery Information
+                  {t("deliveryInfo")}
                 </Link>
                 <Link href="/payment" className="hover:text-foreground">
-                  Payment Methods
+                  {t("paymentMethods")}
                 </Link>
                 <Link href="/returns" className="hover:text-foreground">
-                  Returns & Refunds
+                  {t("returnsRefunds")}
                 </Link>
                 <Link href="/contact-us" className="hover:text-foreground">
-                  Customer Support
+                  {t("customerSupport")}
                 </Link>
               </div>
             </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n";
 
 type UserType = "customer" | "partner";
 
@@ -48,6 +49,7 @@ const countryOptions = [
 
 export default function SignupPage() {
   const router = useRouter();
+  const { t } = useI18n();
 
   const [userType, setUserType] = useState<UserType>("customer");
   const [error, setError] = useState("");
@@ -259,7 +261,7 @@ export default function SignupPage() {
               TinyWay.eu
             </p>
             <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-              Sign Up
+              {t("signUp")}
             </h1>
           </div>
 
@@ -268,7 +270,7 @@ export default function SignupPage() {
               href="/login"
               className="rounded-full border border-border px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-primary hover:text-primary-foreground hover:border-primary"
             >
-              Back to login
+              {t("backToLogin")}
             </Link>
           </nav>
         </header>
@@ -277,23 +279,22 @@ export default function SignupPage() {
           <div className="flex min-h-[680px] flex-col justify-between rounded-[2rem] border border-primary bg-primary p-8 text-primary-foreground md:p-12">
             <div>
               <p className="mb-6 text-xs uppercase tracking-[0.45em] text-primary-foreground/60">
-                New Account
+                {t("newAccount")}
               </p>
               <h2 className="max-w-xl text-4xl font-semibold leading-tight md:text-6xl">
-                Create your TinyWay account
+                {t("createYourAccount")}
               </h2>
               <p className="mt-6 max-w-lg text-base leading-7 text-primary-foreground/70 md:text-lg">
-                Choose your account type. The registration form changes
-                automatically for customer or partner.
+                {t("chooseAccountType")}
               </p>
             </div>
 
             <div className="rounded-[1.5rem] border border-primary-foreground/15 bg-primary-foreground/5 p-5">
               <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/50">
-                Selected account type
+                {t("selectedAccountType")}
               </p>
               <p className="mt-2 text-lg font-medium">
-                {userType === "customer" ? "Customer" : "Partner"}
+                {userType === "customer" ? t("customer") : t("partner")}
               </p>
             </div>
           </div>
@@ -302,17 +303,17 @@ export default function SignupPage() {
             <div className="w-full">
               <div className="mb-8">
                 <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-                  Registration
+                  {t("registration")}
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
-                  Create account
+                  {t("createAccount")}
                 </h2>
               </div>
 
               <form onSubmit={handleSignup} className="space-y-5">
                 <div>
                   <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    Account type
+                    {t("accountType")}
                   </label>
 
                   <div className="grid grid-cols-2 gap-3">
@@ -325,7 +326,7 @@ export default function SignupPage() {
                           : "border border-border bg-card text-foreground hover:bg-primary hover:text-primary-foreground"
                       }`}
                     >
-                      Customer
+                      {t("customer")}
                     </button>
 
                     <button
@@ -337,7 +338,7 @@ export default function SignupPage() {
                           : "border border-border bg-card text-foreground hover:bg-primary hover:text-primary-foreground"
                       }`}
                     >
-                      Partner
+                      {t("partner")}
                     </button>
                   </div>
                 </div>
@@ -484,15 +485,15 @@ export default function SignupPage() {
                   type="submit"
                   className="w-full rounded-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                 >
-                  Sign up
+                  {t("signUp")}
                 </button>
               </form>
 
               <div className="mt-6 text-center">
                 <p className="text-sm text-muted-foreground">
-                  Already have an account?{" "}
+                  {t("alreadyHaveAccount")}{" "}
                   <Link href="/login" className="font-medium text-primary underline">
-                    Login
+                    {t("login")}
                   </Link>
                 </p>
               </div>
