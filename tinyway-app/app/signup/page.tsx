@@ -35,16 +35,16 @@ type StoredPartnerUser = {
 type StoredUser = StoredCustomerUser | StoredPartnerUser;
 
 const countryOptions = [
-  { code: "+371", label: "Latvia" },
-  { code: "+49", label: "Germany" },
-  { code: "+370", label: "Lithuania" },
-  { code: "+372", label: "Estonia" },
-  { code: "+48", label: "Poland" },
-  { code: "+46", label: "Sweden" },
-  { code: "+358", label: "Finland" },
-  { code: "+45", label: "Denmark" },
-  { code: "+33", label: "France" },
-  { code: "+39", label: "Italy" },
+  { code: "+371", label: "LV", flag: "🇱🇻" },
+  { code: "+370", label: "LT", flag: "🇱🇹" },
+  { code: "+372", label: "EE", flag: "🇪🇪" },
+  { code: "+49", label: "DE", flag: "🇩🇪" },
+  { code: "+48", label: "PL", flag: "🇵🇱" },
+  { code: "+46", label: "SE", flag: "🇸🇪" },
+  { code: "+358", label: "FI", flag: "🇫🇮" },
+  { code: "+45", label: "DK", flag: "🇩🇰" },
+  { code: "+33", label: "FR", flag: "🇫🇷" },
+  { code: "+39", label: "IT", flag: "🇮🇹" },
 ];
 
 export default function SignupPage() {
@@ -53,6 +53,8 @@ export default function SignupPage() {
 
   const [userType, setUserType] = useState<UserType>("customer");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const [customerForm, setCustomerForm] = useState({
     name: "",
@@ -81,22 +83,14 @@ export default function SignupPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
-    setCustomerForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setCustomerForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handlePartnerChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
-    setPartnerForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setPartnerForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
@@ -117,16 +111,8 @@ export default function SignupPage() {
       const cleanAddress = customerForm.address.trim();
       const fullPhone = `${cleanPhoneCountryCode} ${cleanPhoneNumber}`.trim();
 
-      if (
-        !cleanName ||
-        !cleanSurname ||
-        !cleanPhoneCountryCode ||
-        !cleanPhoneNumber ||
-        !cleanEmail ||
-        !cleanPassword ||
-        !cleanRepeatPassword
-      ) {
-        setError("Please fill in all required customer fields.");
+      if (!cleanName || !cleanSurname || !cleanPhoneNumber || !cleanEmail || !cleanPassword || !cleanRepeatPassword) {
+        setError("Please fill in all required fields.");
         return;
       }
 
@@ -140,10 +126,7 @@ export default function SignupPage() {
         return;
       }
 
-      const existingUser = users.find(
-        (user) => user.email.toLowerCase() === cleanEmail
-      );
-
+      const existingUser = users.find((user) => user.email.toLowerCase() === cleanEmail);
       if (existingUser) {
         setError("User with this email already exists.");
         return;
@@ -162,23 +145,15 @@ export default function SignupPage() {
       };
 
       localStorage.setItem("users", JSON.stringify([...users, newUser]));
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          email: cleanEmail,
-          isLoggedIn: true,
-          userType: "customer",
-        })
-      );
+      localStorage.setItem("user", JSON.stringify({ email: cleanEmail, isLoggedIn: true, userType: "customer" }));
       localStorage.setItem("userProfile", JSON.stringify(newUser));
-
       router.push("/cabinet");
       return;
     }
 
+    // Partner registration
     const cleanCompanyName = partnerForm.companyName.trim();
-    const cleanCompanyRegistrationNumber =
-      partnerForm.companyRegistrationNumber.trim();
+    const cleanCompanyRegistrationNumber = partnerForm.companyRegistrationNumber.trim();
     const cleanVatNumber = partnerForm.vatNumber.trim();
     const cleanPhoneCountryCode = partnerForm.phoneCountryCode.trim();
     const cleanPhoneNumber = partnerForm.phoneNumber.trim();
@@ -188,16 +163,8 @@ export default function SignupPage() {
     const cleanAddress = partnerForm.address.trim();
     const fullPhone = `${cleanPhoneCountryCode} ${cleanPhoneNumber}`.trim();
 
-    if (
-      !cleanCompanyName ||
-      !cleanCompanyRegistrationNumber ||
-      !cleanPhoneCountryCode ||
-      !cleanPhoneNumber ||
-      !cleanEmail ||
-      !cleanPassword ||
-      !cleanRepeatPassword
-    ) {
-      setError("Please fill in all required partner fields.");
+    if (!cleanCompanyName || !cleanCompanyRegistrationNumber || !cleanPhoneNumber || !cleanEmail || !cleanPassword || !cleanRepeatPassword) {
+      setError("Please fill in all required fields.");
       return;
     }
 
@@ -211,10 +178,7 @@ export default function SignupPage() {
       return;
     }
 
-    const existingUser = users.find(
-      (user) => user.email.toLowerCase() === cleanEmail
-    );
-
+    const existingUser = users.find((user) => user.email.toLowerCase() === cleanEmail);
     if (existingUser) {
       setError("User with this email already exists.");
       return;
@@ -234,361 +198,478 @@ export default function SignupPage() {
     };
 
     localStorage.setItem("users", JSON.stringify([...users, newUser]));
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        email: cleanEmail,
-        isLoggedIn: true,
-        userType: "partner",
-      })
-    );
+    localStorage.setItem("user", JSON.stringify({ email: cleanEmail, isLoggedIn: true, userType: "partner" }));
     localStorage.setItem("userProfile", JSON.stringify(newUser));
-
     router.push("/cabinet");
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-7xl px-6 py-8 md:px-10">
-        <div className="mb-6 flex items-center justify-between border-b border-border pb-4 text-sm uppercase tracking-[0.25em] text-muted-foreground">
-          <span>Luxury minimal electronics</span>
-          <span>Black / White Collection</span>
-        </div>
-
-        <header className="mb-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-              TinyWay.eu
-            </p>
-            <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-              {t("signUp")}
-            </h1>
-          </div>
-
-          <nav className="flex flex-wrap items-center gap-3">
+    <main className="min-h-screen bg-muted/30">
+      {/* Header */}
+      <header className="sticky top-0 z-40 border-b border-border/50 bg-card/80 backdrop-blur-xl">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/" className="flex items-baseline gap-0.5 group">
+              <span className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition">TinyWay</span>
+              <span className="text-sm font-medium text-primary">.eu</span>
+            </Link>
             <Link
               href="/login"
-              className="rounded-full border border-border px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-primary hover:text-primary-foreground hover:border-primary"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition"
             >
-              {t("backToLogin")}
+              {t("login")}
             </Link>
-          </nav>
-        </header>
-
-        <section className="grid gap-6 md:grid-cols-2">
-          <div className="flex min-h-[680px] flex-col justify-between rounded-[2rem] border border-primary bg-primary p-8 text-primary-foreground md:p-12">
-            <div>
-              <p className="mb-6 text-xs uppercase tracking-[0.45em] text-primary-foreground/60">
-                {t("newAccount")}
-              </p>
-              <h2 className="max-w-xl text-4xl font-semibold leading-tight md:text-6xl">
-                {t("createYourAccount")}
-              </h2>
-              <p className="mt-6 max-w-lg text-base leading-7 text-primary-foreground/70 md:text-lg">
-                {t("chooseAccountType")}
-              </p>
-            </div>
-
-            <div className="rounded-[1.5rem] border border-primary-foreground/15 bg-primary-foreground/5 p-5">
-              <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/50">
-                {t("selectedAccountType")}
-              </p>
-              <p className="mt-2 text-lg font-medium">
-                {userType === "customer" ? t("customer") : t("partner")}
-              </p>
-            </div>
           </div>
+        </div>
+      </header>
 
-          <div className="flex min-h-[680px] items-center rounded-[2rem] border border-border bg-muted p-8 md:p-12">
-            <div className="w-full">
-              <div className="mb-8">
-                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
-                  {t("registration")}
-                </p>
-                <h2 className="text-3xl font-semibold md:text-4xl">
-                  {t("createAccount")}
-                </h2>
-              </div>
+      <div className="mx-auto max-w-2xl px-4 py-12 md:py-20">
+        {/* Title */}
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold text-foreground md:text-4xl">{t("createAccount")}</h1>
+          <p className="mt-3 text-muted-foreground">{t("chooseAccountType")}</p>
+        </div>
 
-              <form onSubmit={handleSignup} className="space-y-5">
-                <div>
-                  <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    {t("accountType")}
-                  </label>
+        {/* Account Type Toggle */}
+        <div className="flex p-1 bg-muted rounded-full mb-8">
+          <button
+            type="button"
+            onClick={() => setUserType("customer")}
+            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full text-sm font-medium transition ${
+              userType === "customer"
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            {t("customer")}
+          </button>
+          <button
+            type="button"
+            onClick={() => setUserType("partner")}
+            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full text-sm font-medium transition ${
+              userType === "partner"
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            {t("partner")}
+          </button>
+        </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setUserType("customer")}
-                      className={`rounded-full px-5 py-4 text-sm font-medium uppercase tracking-[0.2em] transition ${
-                        userType === "customer"
-                          ? "bg-primary text-primary-foreground"
-                          : "border border-border bg-card text-foreground hover:bg-primary hover:text-primary-foreground"
-                      }`}
-                    >
-                      {t("customer")}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setUserType("partner")}
-                      className={`rounded-full px-5 py-4 text-sm font-medium uppercase tracking-[0.2em] transition ${
-                        userType === "partner"
-                          ? "bg-primary text-primary-foreground"
-                          : "border border-border bg-card text-foreground hover:bg-primary hover:text-primary-foreground"
-                      }`}
-                    >
-                      {t("partner")}
-                    </button>
+        {/* Form Card */}
+        <div className="bg-card rounded-3xl border border-border shadow-sm p-6 md:p-8">
+          <form onSubmit={handleSignup} className="space-y-5">
+            {userType === "customer" ? (
+              <>
+                {/* Customer Form */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("firstName")} <span className="text-destructive">*</span>
+                    </label>
+                    <div className="relative">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                      <input
+                        name="name"
+                        type="text"
+                        value={customerForm.name}
+                        onChange={handleCustomerChange}
+                        placeholder="John"
+                        className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("lastName")} <span className="text-destructive">*</span>
+                    </label>
+                    <input
+                      name="surname"
+                      type="text"
+                      value={customerForm.surname}
+                      onChange={handleCustomerChange}
+                      placeholder="Doe"
+                      className="w-full h-12 px-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                    />
                   </div>
                 </div>
 
-                {userType === "customer" ? (
-                  <>
-                    <FormInput
-                      label="Name"
-                      name="name"
-                      value={customerForm.name}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t("phoneNumber")} <span className="text-destructive">*</span>
+                  </label>
+                  <div className="flex gap-3">
+                    <select
+                      name="phoneCountryCode"
+                      value={customerForm.phoneCountryCode}
                       onChange={handleCustomerChange}
-                      placeholder="Enter your name"
-                    />
+                      className="h-12 px-3 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary transition text-foreground w-28"
+                    >
+                      {countryOptions.map((c) => (
+                        <option key={c.code} value={c.code}>{c.flag} {c.code}</option>
+                      ))}
+                    </select>
+                    <div className="relative flex-1">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <input
+                        name="phoneNumber"
+                        type="tel"
+                        value={customerForm.phoneNumber}
+                        onChange={handleCustomerChange}
+                        placeholder="20123456"
+                        className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-                    <FormInput
-                      label="Surname"
-                      name="surname"
-                      value={customerForm.surname}
-                      onChange={handleCustomerChange}
-                      placeholder="Enter your surname"
-                    />
-
-                    <PhoneInput
-                      countryCodeName="phoneCountryCode"
-                      phoneNumberName="phoneNumber"
-                      countryCodeValue={customerForm.phoneCountryCode}
-                      phoneNumberValue={customerForm.phoneNumber}
-                      onChange={handleCustomerChange}
-                    />
-
-                    <FormInput
-                      label="Email"
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t("email")} <span className="text-destructive">*</span>
+                  </label>
+                  <div className="relative">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <input
                       name="email"
                       type="email"
                       value={customerForm.email}
                       onChange={handleCustomerChange}
-                      placeholder="Enter your email"
+                      placeholder="john@example.com"
+                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
                     />
+                  </div>
+                </div>
 
-                    <FormInput
-                      label="Address (optional)"
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t("address")} <span className="text-muted-foreground text-xs">({t("optional")})</span>
+                  </label>
+                  <div className="relative">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <input
                       name="address"
+                      type="text"
                       value={customerForm.address}
                       onChange={handleCustomerChange}
-                      placeholder="Enter your address"
+                      placeholder="Street, City, Country"
+                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
                     />
+                  </div>
+                </div>
 
-                    <FormInput
-                      label="Password"
-                      name="password"
-                      type="password"
-                      value={customerForm.password}
-                      onChange={handleCustomerChange}
-                      placeholder="Enter your password"
-                    />
-
-                    <FormInput
-                      label="Repeat password"
-                      name="repeatPassword"
-                      type="password"
-                      value={customerForm.repeatPassword}
-                      onChange={handleCustomerChange}
-                      placeholder="Repeat your password"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <FormInput
-                      label="Company name"
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("password")} <span className="text-destructive">*</span>
+                    </label>
+                    <div className="relative">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <input
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        value={customerForm.password}
+                        onChange={handleCustomerChange}
+                        placeholder="Min 6 chars"
+                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                      >
+                        {showPassword ? (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                          </svg>
+                        ) : (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("repeatPassword")} <span className="text-destructive">*</span>
+                    </label>
+                    <div className="relative">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <input
+                        name="repeatPassword"
+                        type={showRepeatPassword ? "text" : "password"}
+                        value={customerForm.repeatPassword}
+                        onChange={handleCustomerChange}
+                        placeholder="Repeat"
+                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                      >
+                        {showRepeatPassword ? (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                          </svg>
+                        ) : (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Partner Form */}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t("companyName")} <span className="text-destructive">*</span>
+                  </label>
+                  <div className="relative">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <input
                       name="companyName"
+                      type="text"
                       value={partnerForm.companyName}
                       onChange={handlePartnerChange}
-                      placeholder="Enter company name"
+                      placeholder="Company Ltd."
+                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
                     />
+                  </div>
+                </div>
 
-                    <FormInput
-                      label="Company registration number"
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("regNumber")} <span className="text-destructive">*</span>
+                    </label>
+                    <input
                       name="companyRegistrationNumber"
+                      type="text"
                       value={partnerForm.companyRegistrationNumber}
                       onChange={handlePartnerChange}
-                      placeholder="Enter registration number"
+                      placeholder="40001234567"
+                      className="w-full h-12 px-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
                     />
-
-                    <FormInput
-                      label="VAT number (optional)"
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("vatNumber")} <span className="text-muted-foreground text-xs">({t("optional")})</span>
+                    </label>
+                    <input
                       name="vatNumber"
+                      type="text"
                       value={partnerForm.vatNumber}
                       onChange={handlePartnerChange}
-                      placeholder="Enter VAT number"
+                      placeholder="LV40001234567"
+                      className="w-full h-12 px-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
                     />
+                  </div>
+                </div>
 
-                    <PhoneInput
-                      countryCodeName="phoneCountryCode"
-                      phoneNumberName="phoneNumber"
-                      countryCodeValue={partnerForm.phoneCountryCode}
-                      phoneNumberValue={partnerForm.phoneNumber}
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t("phoneNumber")} <span className="text-destructive">*</span>
+                  </label>
+                  <div className="flex gap-3">
+                    <select
+                      name="phoneCountryCode"
+                      value={partnerForm.phoneCountryCode}
                       onChange={handlePartnerChange}
-                    />
+                      className="h-12 px-3 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary transition text-foreground w-28"
+                    >
+                      {countryOptions.map((c) => (
+                        <option key={c.code} value={c.code}>{c.flag} {c.code}</option>
+                      ))}
+                    </select>
+                    <div className="relative flex-1">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <input
+                        name="phoneNumber"
+                        type="tel"
+                        value={partnerForm.phoneNumber}
+                        onChange={handlePartnerChange}
+                        placeholder="20123456"
+                        className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-                    <FormInput
-                      label="Email"
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t("email")} <span className="text-destructive">*</span>
+                  </label>
+                  <div className="relative">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <input
                       name="email"
                       type="email"
                       value={partnerForm.email}
                       onChange={handlePartnerChange}
-                      placeholder="Enter email"
+                      placeholder="info@company.com"
+                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
                     />
+                  </div>
+                </div>
 
-                    <FormInput
-                      label="Address (optional)"
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {t("address")} <span className="text-muted-foreground text-xs">({t("optional")})</span>
+                  </label>
+                  <div className="relative">
+                    <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <input
                       name="address"
+                      type="text"
                       value={partnerForm.address}
                       onChange={handlePartnerChange}
-                      placeholder="Enter address"
+                      placeholder="Street, City, Country"
+                      className="w-full h-12 pl-12 pr-4 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
                     />
-
-                    <FormInput
-                      label="Password"
-                      name="password"
-                      type="password"
-                      value={partnerForm.password}
-                      onChange={handlePartnerChange}
-                      placeholder="Enter password"
-                    />
-
-                    <FormInput
-                      label="Repeat password"
-                      name="repeatPassword"
-                      type="password"
-                      value={partnerForm.repeatPassword}
-                      onChange={handlePartnerChange}
-                      placeholder="Repeat your password"
-                    />
-                  </>
-                )}
-
-                {error && (
-                  <div className="rounded-[1.25rem] border border-destructive/30 bg-destructive/10 px-5 py-4 text-sm text-destructive">
-                    {error}
                   </div>
-                )}
+                </div>
 
-                <button
-                  type="submit"
-                  className="w-full rounded-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
-                >
-                  {t("signUp")}
-                </button>
-              </form>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("password")} <span className="text-destructive">*</span>
+                    </label>
+                    <div className="relative">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <input
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        value={partnerForm.password}
+                        onChange={handlePartnerChange}
+                        placeholder="Min 6 chars"
+                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                      >
+                        {showPassword ? (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                          </svg>
+                        ) : (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      {t("repeatPassword")} <span className="text-destructive">*</span>
+                    </label>
+                    <div className="relative">
+                      <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <input
+                        name="repeatPassword"
+                        type={showRepeatPassword ? "text" : "password"}
+                        value={partnerForm.repeatPassword}
+                        onChange={handlePartnerChange}
+                        placeholder="Repeat"
+                        className="w-full h-12 pl-12 pr-12 bg-muted/50 border border-border rounded-xl outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition text-foreground placeholder:text-muted-foreground"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                      >
+                        {showRepeatPassword ? (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                          </svg>
+                        ) : (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
 
-              <div className="mt-6 text-center">
-                <p className="text-sm text-muted-foreground">
-                  {t("alreadyHaveAccount")}{" "}
-                  <Link href="/login" className="font-medium text-primary underline">
-                    {t("login")}
-                  </Link>
-                </p>
+            {/* Error Message */}
+            {error && (
+              <div className="flex items-center gap-3 p-4 bg-destructive/10 border border-destructive/20 rounded-xl">
+                <svg className="w-5 h-5 text-destructive shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-sm text-destructive">{error}</p>
               </div>
-            </div>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full h-12 bg-primary text-primary-foreground rounded-xl font-medium hover:opacity-90 transition flex items-center justify-center gap-2"
+            >
+              {t("createAccount")}
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+          </form>
+
+          {/* Login Link */}
+          <div className="mt-6 text-center">
+            <p className="text-sm text-muted-foreground">
+              {t("alreadyHaveAccount")}{" "}
+              <Link href="/login" className="font-medium text-primary hover:underline">
+                {t("login")}
+              </Link>
+            </p>
           </div>
-        </section>
+        </div>
       </div>
     </main>
-  );
-}
-
-type FormInputProps = {
-  label: string;
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  type?: string;
-};
-
-function FormInput({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  type = "text",
-}: FormInputProps) {
-  return (
-    <div>
-      <label
-        htmlFor={name}
-        className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground"
-      >
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full rounded-full border border-border bg-card px-6 py-4 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
-      />
-    </div>
-  );
-}
-
-type PhoneInputProps = {
-  countryCodeName: string;
-  phoneNumberName: string;
-  countryCodeValue: string;
-  phoneNumberValue: string;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-};
-
-function PhoneInput({
-  countryCodeName,
-  phoneNumberName,
-  countryCodeValue,
-  phoneNumberValue,
-  onChange,
-}: PhoneInputProps) {
-  return (
-    <div>
-      <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground">
-        Phone number
-      </label>
-
-      <div className="grid grid-cols-[170px_1fr] gap-3">
-        <select
-          name={countryCodeName}
-          value={countryCodeValue}
-          onChange={onChange}
-          className="rounded-full border border-border bg-card px-4 py-4 text-foreground outline-none transition focus:border-primary"
-        >
-          {countryOptions.map((country) => (
-            <option key={country.code} value={country.code}>
-              {country.code} {country.label}
-            </option>
-          ))}
-        </select>
-
-        <input
-          name={phoneNumberName}
-          type="text"
-          value={phoneNumberValue}
-          onChange={onChange}
-          placeholder="Enter phone number"
-          className="w-full rounded-full border border-border bg-card px-6 py-4 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
-        />
-      </div>
-    </div>
   );
 }
