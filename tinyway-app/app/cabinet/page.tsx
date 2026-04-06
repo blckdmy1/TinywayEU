@@ -288,15 +288,15 @@ export default function CabinetPage() {
 
   if (!checkedAuth) {
     return (
-      <main className="min-h-screen bg-white text-black">
+      <main className="min-h-screen bg-background text-foreground">
         <div className="mx-auto max-w-7xl px-6 py-8 md:px-10">
-          <div className="mb-6 flex items-center justify-between border-b border-black/10 pb-4 text-sm uppercase tracking-[0.25em] text-black/60">
+          <div className="mb-6 flex items-center justify-between border-b border-border pb-4 text-sm uppercase tracking-[0.25em] text-muted-foreground">
             <span>Luxury minimal electronics</span>
             <span>Black / White Collection</span>
           </div>
 
-          <div className="rounded-[2rem] border border-black/10 bg-[#f8f8f8] p-8 text-center">
-            <p className="text-lg text-black/60">Checking your account...</p>
+          <div className="rounded-[2rem] border border-border bg-muted p-8 text-center">
+            <p className="text-lg text-muted-foreground">Checking your account...</p>
           </div>
         </div>
       </main>
@@ -304,16 +304,16 @@ export default function CabinetPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white text-black">
+    <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-10">
-        <div className="mb-6 flex items-center justify-between border-b border-black/10 pb-4 text-sm uppercase tracking-[0.25em] text-black/60">
+        <div className="mb-6 flex items-center justify-between border-b border-border pb-4 text-sm uppercase tracking-[0.25em] text-muted-foreground">
           <span>Luxury minimal electronics</span>
           <span>Black / White Collection</span>
         </div>
 
         <header className="mb-12 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/50">
+            <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
               TinyWay.eu
             </p>
             <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
@@ -324,14 +324,14 @@ export default function CabinetPage() {
           <nav className="flex flex-wrap items-center gap-3">
             <Link
               href="/"
-              className="rounded-full border border-black px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-black hover:text-white"
+              className="rounded-full border border-border px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-primary hover:text-primary-foreground hover:border-primary"
             >
               Home
             </Link>
 
             <button
               onClick={handleLogout}
-              className="rounded-full bg-black px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] text-white transition hover:opacity-85"
+              className="rounded-full bg-primary px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
             >
               Logout
             </button>
@@ -339,9 +339,9 @@ export default function CabinetPage() {
         </header>
 
         <section className="grid gap-6 lg:grid-cols-[300px_1fr]">
-          <aside className="rounded-[2rem] border border-black bg-black p-6 text-white">
+          <aside className="rounded-[2rem] border border-primary bg-primary p-6 text-primary-foreground">
             <div className="mb-8 text-center">
-              <div className="mx-auto mb-4 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/10">
+              <div className="mx-auto mb-4 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-primary-foreground/20 bg-primary-foreground/10">
                 {profile.photo ? (
                   <img
                     src={profile.photo}
@@ -349,7 +349,7 @@ export default function CabinetPage() {
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <span className="text-xs uppercase tracking-[0.25em] text-white/60">
+                  <span className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60">
                     No photo
                   </span>
                 )}
@@ -360,7 +360,7 @@ export default function CabinetPage() {
                   ? `${profile.name} ${profile.surname}`.trim()
                   : "Your Profile"}
               </p>
-              <p className="mt-1 text-sm text-white/60">
+              <p className="mt-1 text-sm text-primary-foreground/60">
                 {profile.email || "No email"}
               </p>
             </div>
@@ -400,10 +400,10 @@ export default function CabinetPage() {
             </div>
           </aside>
 
-          <div className="rounded-[2rem] border border-black/10 bg-[#f8f8f8] p-8 md:p-10">
+          <div className="rounded-[2rem] border border-border bg-muted p-8 md:p-10">
             {activeSection === "account" && (
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/40">
+                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
                   Account Information
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
@@ -435,18 +435,18 @@ export default function CabinetPage() {
 
             {activeSection === "delivery" && (
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/40">
+                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
                   Delivery Address
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
                   Delivery details
                 </h2>
 
-                <div className="mt-8 rounded-[1.5rem] border border-black/10 bg-white p-6">
-                  <p className="text-xs uppercase tracking-[0.3em] text-black/40">
+                <div className="mt-8 rounded-[1.5rem] border border-border bg-card p-6">
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                     Current delivery address
                   </p>
-                  <p className="mt-3 text-lg text-black/70">
+                  <p className="mt-3 text-lg text-foreground/70">
                     {profile.deliveryAddress ||
                       "You have not added a delivery address yet."}
                   </p>
@@ -455,7 +455,7 @@ export default function CabinetPage() {
                 <div className="mt-6">
                   <button
                     onClick={() => setActiveSection("settings")}
-                    className="rounded-full bg-black px-6 py-3 text-sm font-medium uppercase tracking-[0.2em] text-white transition hover:opacity-85"
+                    className="rounded-full bg-primary px-6 py-3 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                   >
                     Change address
                   </button>
@@ -465,7 +465,7 @@ export default function CabinetPage() {
 
             {activeSection === "settings" && (
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/40">
+                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
                   Settings
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
@@ -473,8 +473,8 @@ export default function CabinetPage() {
                 </h2>
 
                 <div className="mt-8 grid gap-6 lg:grid-cols-[220px_1fr]">
-                  <div className="rounded-[1.5rem] border border-black bg-black p-6 text-white">
-                    <p className="mb-4 text-xs uppercase tracking-[0.35em] text-white/60">
+                  <div className="rounded-[1.5rem] border border-primary bg-primary p-6 text-primary-foreground">
+                    <p className="mb-4 text-xs uppercase tracking-[0.35em] text-primary-foreground/60">
                       Profile Photo
                     </p>
 
@@ -483,16 +483,16 @@ export default function CabinetPage() {
                         <img
                           src={profile.photo}
                           alt="Profile"
-                          className="h-28 w-28 rounded-full object-cover border border-white/20"
+                          className="h-28 w-28 rounded-full object-cover border border-primary-foreground/20"
                         />
                       ) : (
-                        <div className="flex h-28 w-28 items-center justify-center rounded-full border border-white/20 bg-white/10 text-xs uppercase tracking-[0.2em] text-white/60">
+                        <div className="flex h-28 w-28 items-center justify-center rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-xs uppercase tracking-[0.2em] text-primary-foreground/60">
                           No Photo
                         </div>
                       )}
                     </div>
 
-                    <label className="block cursor-pointer rounded-full border border-white/20 px-4 py-3 text-center text-xs font-medium uppercase tracking-[0.2em] transition hover:bg-white hover:text-black">
+                    <label className="block cursor-pointer rounded-full border border-primary-foreground/20 px-4 py-3 text-center text-xs font-medium uppercase tracking-[0.2em] transition hover:bg-card hover:text-foreground">
                       Upload Photo
                       <input
                         type="file"
@@ -503,7 +503,7 @@ export default function CabinetPage() {
                     </label>
                   </div>
 
-                  <div className="rounded-[1.5rem] border border-black/10 bg-white p-6">
+                  <div className="rounded-[1.5rem] border border-border bg-card p-6">
                     <div className="grid gap-5 md:grid-cols-2">
                       <FormInput
                         label="Name"
@@ -554,16 +554,16 @@ export default function CabinetPage() {
                       />
                     </div>
 
-                    <div className="mt-8 flex flex-col gap-4 md:flex-row md:items-center">
-                      <button
+<div className="mt-8 flex flex-col gap-4 md:flex-row md:items-center">
+                                      <button
                         onClick={handleSaveProfile}
-                        className="rounded-full bg-black px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-white transition hover:opacity-85"
+                        className="rounded-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                       >
                         Save changes
                       </button>
 
                       {saveMessage && (
-                        <p className="text-sm text-green-600">{saveMessage}</p>
+                        <p className="text-sm text-primary">{saveMessage}</p>
                       )}
                     </div>
                   </div>
@@ -573,7 +573,7 @@ export default function CabinetPage() {
 
             {activeSection === "liked" && (
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/40">
+                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
                   Saved Goods
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
@@ -582,14 +582,14 @@ export default function CabinetPage() {
 
                 <div className="mt-8 space-y-4">
                   {likedItems.length === 0 ? (
-                    <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 text-black/60">
+                    <div className="rounded-[1.5rem] border border-border bg-card p-6 text-muted-foreground">
                       You have no liked products yet.
                     </div>
                   ) : (
                     likedItems.map((item) => (
                       <div
                         key={item.id}
-                        className="flex items-center justify-between rounded-[1.5rem] border border-black/10 bg-white p-4"
+                        className="flex items-center justify-between rounded-[1.5rem] border border-border bg-card p-4"
                       >
                         <div className="flex items-center gap-4">
                           {item.image ? (
@@ -599,13 +599,13 @@ export default function CabinetPage() {
                               className="h-16 w-16 rounded-xl object-cover"
                             />
                           ) : (
-                            <div className="h-16 w-16 rounded-xl bg-black/5" />
+                            <div className="h-16 w-16 rounded-xl bg-muted" />
                           )}
 
                           <div>
                             <p className="text-lg font-medium">{item.name}</p>
                             {item.price !== undefined && (
-                              <p className="text-sm text-black/50">
+                              <p className="text-sm text-muted-foreground">
                                 €{item.price}
                               </p>
                             )}
@@ -614,7 +614,7 @@ export default function CabinetPage() {
 
                         <button
                           onClick={() => removeLikedItem(item.id)}
-                          className="rounded-full border border-black px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:bg-black hover:text-white"
+                          className="rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:bg-destructive hover:text-primary-foreground hover:border-destructive"
                         >
                           Remove
                         </button>
@@ -627,14 +627,14 @@ export default function CabinetPage() {
 
             {activeSection === "goods" && userType === "partner" && (
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/40">
+                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
                   My Goods
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
                   Add and manage your products
                 </h2>
 
-                <div className="mt-8 rounded-[1.5rem] border border-black/10 bg-white p-6">
+                <div className="mt-8 rounded-[1.5rem] border border-border bg-card p-6">
                   <div className="grid gap-5 md:grid-cols-2">
                     <FormInput
                       label="Product name"
@@ -680,27 +680,27 @@ export default function CabinetPage() {
                   <div className="mt-8 flex flex-col gap-4 md:flex-row md:items-center">
                     <button
                       onClick={handleAddProduct}
-                      className="rounded-full bg-black px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-white transition hover:opacity-85"
+                      className="rounded-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                     >
                       Add product
                     </button>
 
                     {productMessage && (
-                      <p className="text-sm text-green-600">{productMessage}</p>
+                      <p className="text-sm text-primary">{productMessage}</p>
                     )}
                   </div>
                 </div>
 
                 <div className="mt-8 space-y-4">
                   {partnerProducts.length === 0 ? (
-                    <div className="rounded-[1.5rem] border border-black/10 bg-white p-6 text-black/60">
+                    <div className="rounded-[1.5rem] border border-border bg-card p-6 text-muted-foreground">
                       You have not added any products yet.
                     </div>
                   ) : (
                     partnerProducts.map((product) => (
                       <div
                         key={product.id}
-                        className="rounded-[1.5rem] border border-black/10 bg-white p-5"
+                        className="rounded-[1.5rem] border border-border bg-card p-5"
                       >
                         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                           <div className="flex items-start gap-4">
@@ -711,21 +711,21 @@ export default function CabinetPage() {
                                 className="h-20 w-20 rounded-xl object-cover"
                               />
                             ) : (
-                              <div className="h-20 w-20 rounded-xl bg-black/5" />
+                              <div className="h-20 w-20 rounded-xl bg-muted" />
                             )}
 
                             <div>
                               <p className="text-lg font-medium">
                                 {product.name}
                               </p>
-                              <p className="mt-1 text-sm text-black/50">
+                              <p className="mt-1 text-sm text-muted-foreground">
                                 €{product.price}
                               </p>
-                              <p className="mt-1 text-sm text-black/50">
+                              <p className="mt-1 text-sm text-muted-foreground">
                                 Stock left: {product.stock}
                               </p>
                               {product.description && (
-                                <p className="mt-2 text-sm text-black/60">
+                                <p className="mt-2 text-sm text-muted-foreground">
                                   {product.description}
                                 </p>
                               )}
@@ -734,7 +734,7 @@ export default function CabinetPage() {
 
                           <button
                             onClick={() => handleRemoveProduct(product.id)}
-                            className="rounded-full border border-black px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:bg-black hover:text-white"
+                            className="rounded-full border border-border px-4 py-2 text-xs uppercase tracking-[0.2em] transition hover:bg-destructive hover:text-primary-foreground hover:border-destructive"
                           >
                             Remove
                           </button>
@@ -748,16 +748,16 @@ export default function CabinetPage() {
           </div>
         </section>
 
-        <footer className="mt-12 flex flex-col gap-4 border-t border-black/10 pt-6 text-sm text-black/50 md:flex-row md:items-center md:justify-between">
+        <footer className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
           <p>© 2026 TinyWay.eu</p>
           <div className="flex gap-6">
-            <Link href="/" className="hover:text-black">
+            <Link href="/" className="hover:text-foreground">
               Home
             </Link>
-            <Link href="/cabinet" className="hover:text-black">
+            <Link href="/cabinet" className="hover:text-foreground">
               Cabinet
             </Link>
-            <Link href="/cart" className="hover:text-black">
+            <Link href="/cart" className="hover:text-foreground">
               Cart
             </Link>
           </div>
@@ -779,8 +779,8 @@ function MenuButton({ label, isActive, onClick }: MenuButtonProps) {
       onClick={onClick}
       className={`w-full rounded-full px-5 py-3 text-left text-sm font-medium uppercase tracking-[0.2em] transition ${
         isActive
-          ? "bg-white text-black"
-          : "border border-white/15 bg-white/5 text-white hover:bg-white hover:text-black"
+          ? "bg-card text-foreground"
+          : "border border-primary-foreground/15 bg-primary-foreground/5 text-primary-foreground hover:bg-card hover:text-foreground"
       }`}
     >
       {label}
@@ -795,8 +795,8 @@ type InfoCardProps = {
 
 function InfoCard({ label, value }: InfoCardProps) {
   return (
-    <div className="rounded-[1.5rem] border border-black/10 bg-white p-6">
-      <p className="text-xs uppercase tracking-[0.3em] text-black/40">
+    <div className="rounded-[1.5rem] border border-border bg-card p-6">
+      <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
         {label}
       </p>
       <p className="mt-2 text-xl font-medium">{value}</p>
@@ -823,7 +823,7 @@ function FormInput({
     <div>
       <label
         htmlFor={name}
-        className="mb-2 block text-xs uppercase tracking-[0.3em] text-black/45"
+        className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground"
       >
         {label}
       </label>
@@ -834,7 +834,7 @@ function FormInput({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full rounded-full border border-black/15 bg-white px-6 py-4 text-black outline-none transition placeholder:text-black/35 focus:border-black"
+        className="w-full rounded-full border border-border bg-background px-6 py-4 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
       />
     </div>
   );
@@ -859,7 +859,7 @@ function TextAreaInput({
     <div className="md:col-span-2">
       <label
         htmlFor={name}
-        className="mb-2 block text-xs uppercase tracking-[0.3em] text-black/45"
+        className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground"
       >
         {label}
       </label>
@@ -870,7 +870,7 @@ function TextAreaInput({
         onChange={onChange}
         placeholder={placeholder}
         rows={4}
-        className="w-full rounded-[1.5rem] border border-black/15 bg-white px-6 py-4 text-black outline-none transition placeholder:text-black/35 focus:border-black"
+        className="w-full rounded-[1.5rem] border border-border bg-background px-6 py-4 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
       />
     </div>
   );

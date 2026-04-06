@@ -78,22 +78,22 @@ export default function CartPage() {
 
   if (!isLoaded) {
     return (
-      <main className="mx-auto max-w-6xl px-4 py-10">
+      <main className="mx-auto max-w-6xl px-4 py-10 bg-background text-foreground min-h-screen">
         <h1 className="mb-6 text-3xl font-bold">Cart</h1>
-        <p className="text-gray-600">Loading cart...</p>
+        <p className="text-muted-foreground">Loading cart...</p>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
+    <main className="mx-auto max-w-6xl px-4 py-10 bg-background text-foreground min-h-screen">
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-3xl font-bold">Cart</h1>
 
         {cartItems.length > 0 && (
           <button
             onClick={clearCart}
-            className="w-fit rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition hover:bg-red-100"
+            className="w-fit rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-2 text-sm font-medium text-destructive transition hover:bg-destructive/20"
           >
             Clear cart
           </button>
@@ -101,15 +101,15 @@ export default function CartPage() {
       </div>
 
       {cartItems.length === 0 ? (
-        <div className="rounded-2xl border bg-white p-8 text-center shadow-sm">
+        <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
           <h2 className="mb-2 text-xl font-semibold">Your cart is empty</h2>
-          <p className="mb-6 text-gray-600">
+          <p className="mb-6 text-muted-foreground">
             Looks like you have not added any products yet.
           </p>
 
           <Link
             href="/"
-            className="inline-block rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
+            className="inline-block rounded-lg bg-primary px-5 py-3 font-medium text-primary-foreground transition hover:opacity-90"
           >
             Continue shopping
           </Link>
@@ -125,10 +125,10 @@ export default function CartPage() {
               return (
                 <div
                   key={item.id}
-                  className="rounded-2xl border bg-white p-4 shadow-sm"
+                  className="rounded-2xl border border-border bg-card p-4 shadow-sm"
                 >
                   <div className="flex flex-col gap-4 sm:flex-row">
-                    <div className="relative h-28 w-full overflow-hidden rounded-xl bg-gray-100 sm:w-28">
+                    <div className="relative h-28 w-full overflow-hidden rounded-xl bg-muted sm:w-28">
                       <Image
                         src={imageSrc}
                         alt={title}
@@ -142,12 +142,12 @@ export default function CartPage() {
                       <div>
                         <Link
                           href={`/product/${item.id}`}
-                          className="text-lg font-semibold hover:text-blue-600"
+                          className="text-lg font-semibold hover:text-primary"
                         >
                           {title}
                         </Link>
 
-                        <p className="mt-2 text-sm text-gray-500">
+                        <p className="mt-2 text-sm text-muted-foreground">
                           Price: €{item.price.toFixed(2)}
                         </p>
                       </div>
@@ -156,7 +156,7 @@ export default function CartPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => updateQuantity(item.id, quantity - 1)}
-                            className="h-9 w-9 rounded-lg border text-lg hover:bg-gray-50"
+                            className="h-9 w-9 rounded-lg border border-border text-lg hover:bg-muted"
                           >
                             -
                           </button>
@@ -167,7 +167,7 @@ export default function CartPage() {
 
                           <button
                             onClick={() => updateQuantity(item.id, quantity + 1)}
-                            className="h-9 w-9 rounded-lg border text-lg hover:bg-gray-50"
+                            className="h-9 w-9 rounded-lg border border-border text-lg hover:bg-muted"
                           >
                             +
                           </button>
@@ -180,7 +180,7 @@ export default function CartPage() {
 
                           <button
                             onClick={() => removeItem(item.id)}
-                            className="text-sm font-medium text-red-600 hover:underline"
+                            className="text-sm font-medium text-destructive hover:underline"
                           >
                             Remove
                           </button>
@@ -193,40 +193,40 @@ export default function CartPage() {
             })}
           </div>
 
-          <aside className="h-fit rounded-2xl border bg-white p-6 shadow-sm">
+          <aside className="h-fit rounded-2xl border border-border bg-card p-6 shadow-sm">
             <h2 className="mb-4 text-xl font-semibold">Order summary</h2>
 
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Items</span>
+                <span className="text-muted-foreground">Items</span>
                 <span>{totalItems}</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Subtotal</span>
+                <span className="text-muted-foreground">Subtotal</span>
                 <span>€{totalPrice.toFixed(2)}</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Delivery</span>
+                <span className="text-muted-foreground">Delivery</span>
                 <span>Free</span>
               </div>
             </div>
 
-            <div className="my-5 border-t" />
+            <div className="my-5 border-t border-border" />
 
             <div className="mb-6 flex items-center justify-between text-lg font-bold">
               <span>Total</span>
               <span>€{totalPrice.toFixed(2)}</span>
             </div>
 
-            <button className="w-full rounded-lg bg-green-600 px-5 py-3 font-medium text-white transition hover:bg-green-700">
+            <button className="w-full rounded-lg bg-primary px-5 py-3 font-medium text-primary-foreground transition hover:opacity-90">
               Checkout
             </button>
 
             <Link
               href="/"
-              className="mt-3 block text-center text-sm text-blue-600 hover:underline"
+              className="mt-3 block text-center text-sm text-primary hover:underline"
             >
               Continue shopping
             </Link>

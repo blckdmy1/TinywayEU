@@ -193,9 +193,9 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f7f7f8] text-slate-900">
-      <div className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 text-sm text-slate-600 md:flex-row md:items-center md:justify-between md:px-6">
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="border-b border-border bg-card">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6">
           <div className="flex flex-wrap items-center gap-4">
             <span>Fast delivery across Europe</span>
             <span className="hidden md:inline">•</span>
@@ -205,23 +205,23 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-4 text-sm">
-            <Link href="/delivery" className="hover:text-slate-900">
+            <Link href="/delivery" className="hover:text-foreground">
               Delivery
             </Link>
-            <Link href="/payment" className="hover:text-slate-900">
+            <Link href="/payment" className="hover:text-foreground">
               Payment
             </Link>
-            <Link href="/returns" className="hover:text-slate-900">
+            <Link href="/returns" className="hover:text-foreground">
               Returns
             </Link>
-            <Link href="/contact-us" className="hover:text-slate-900">
+            <Link href="/contact-us" className="hover:text-foreground">
               Support
             </Link>
           </div>
         </div>
       </div>
 
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-border bg-card/95 backdrop-blur">
         <div className="mx-auto max-w-7xl px-4 py-4 md:px-6">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
@@ -229,23 +229,23 @@ export default function HomePage() {
                 <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
                   TinyWay.eu
                 </h1>
-                <p className="mt-1 text-sm text-slate-500">
+                <p className="mt-1 text-sm text-muted-foreground">
                   Easy shopping for everyday essentials
                 </p>
               </Link>
 
-              <div className="flex w-full max-w-3xl items-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-sm">
-                <button className="hidden border-r border-slate-200 px-4 py-3 text-sm font-medium text-slate-700 md:block">
+              <div className="flex w-full max-w-3xl items-center overflow-hidden rounded-2xl border border-border bg-muted shadow-sm">
+                <button className="hidden border-r border-border px-4 py-3 text-sm font-medium text-foreground md:block">
                   All Categories
                 </button>
 
                 <input
                   type="text"
                   placeholder="Search for products, brands or categories"
-                  className="w-full bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-slate-400"
+                  className="w-full bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-muted-foreground"
                 />
 
-                <button className="bg-slate-900 px-5 py-3.5 text-sm font-medium text-white transition hover:bg-slate-800">
+                <button className="bg-primary px-5 py-3.5 text-sm font-medium text-primary-foreground transition hover:opacity-90">
                   Search
                 </button>
               </div>
@@ -254,7 +254,7 @@ export default function HomePage() {
                 {user ? (
                   <Link
                     href="/cabinet"
-                    className="flex h-11 min-w-[44px] items-center justify-center rounded-xl border border-slate-300 bg-white px-3 text-sm font-medium transition hover:border-slate-900 hover:text-slate-900"
+                    className="flex h-11 min-w-[44px] items-center justify-center rounded-xl border border-border bg-card px-3 text-sm font-medium transition hover:border-primary hover:text-primary"
                     title={user.email}
                   >
                     Account
@@ -262,7 +262,7 @@ export default function HomePage() {
                 ) : (
                   <Link
                     href="/login"
-                    className="rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-medium transition hover:border-slate-900 hover:text-slate-900"
+                    className="rounded-xl border border-border px-4 py-2.5 text-sm font-medium transition hover:border-primary hover:text-primary"
                   >
                     Login
                   </Link>
@@ -270,11 +270,11 @@ export default function HomePage() {
 
                 <Link
                   href="/cart"
-                  className="relative rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800"
+                  className="relative rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90"
                 >
                   Cart
                   {cart.length > 0 && (
-                    <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                    <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
                       {cart.length}
                     </span>
                   )}
@@ -282,26 +282,26 @@ export default function HomePage() {
               </div>
             </div>
 
-            <nav className="flex flex-wrap gap-5 text-sm font-medium text-slate-600">
-              <Link href="/" className="hover:text-slate-900">
+            <nav className="flex flex-wrap gap-5 text-sm font-medium text-muted-foreground">
+              <Link href="/" className="hover:text-foreground">
                 Home
               </Link>
-              <Link href="/categories" className="hover:text-slate-900">
+              <Link href="/categories" className="hover:text-foreground">
                 Categories
               </Link>
-              <Link href="/deals" className="hover:text-slate-900">
+              <Link href="/deals" className="hover:text-foreground">
                 Deals
               </Link>
-              <Link href="/new-arrivals" className="hover:text-slate-900">
+              <Link href="/new-arrivals" className="hover:text-foreground">
                 New Arrivals
               </Link>
-              <Link href="/best-sellers" className="hover:text-slate-900">
+              <Link href="/best-sellers" className="hover:text-foreground">
                 Best Sellers
               </Link>
-              <Link href="/contact-us" className="hover:text-slate-900">
+              <Link href="/contact-us" className="hover:text-foreground">
                 Contact Us
               </Link>
-              <Link href="/my-account" className="hover:text-slate-900">
+              <Link href="/my-account" className="hover:text-foreground">
                 My Account
               </Link>
             </nav>
@@ -311,8 +311,8 @@ export default function HomePage() {
 
       <div className="mx-auto max-w-7xl px-4 py-6 md:px-6 md:py-8">
         <section className="grid gap-6 lg:grid-cols-[240px_1fr]">
-          <aside className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+          <aside className="rounded-3xl border border-border bg-card p-5 shadow-sm">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
               Shop by Category
             </h2>
 
@@ -321,10 +321,10 @@ export default function HomePage() {
                 <Link
                   key={category.slug}
                   href={`/category/${category.slug}`}
-                  className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
+                  className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-foreground/80 transition hover:bg-muted hover:text-foreground"
                 >
                   <span>{category.name}</span>
-                  <span className="text-slate-300">›</span>
+                  <span className="text-muted-foreground/50">›</span>
                 </Link>
               ))}
             </div>
@@ -332,13 +332,13 @@ export default function HomePage() {
 
           <div className="space-y-6">
             <section className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-              <div className="relative overflow-hidden rounded-3xl bg-slate-200 shadow-sm">
+              <div className="relative overflow-hidden rounded-3xl bg-muted shadow-sm">
                 <img
                   src="https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1600&auto=format&fit=crop"
                   alt="Featured shopping banner"
                   className="h-full min-h-[380px] w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/75 via-slate-900/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#2d2a26]/80 via-[#2d2a26]/40 to-transparent" />
                 <div className="absolute inset-0 flex flex-col justify-end p-6 text-white md:p-10">
                   <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/70">
                     Smart shopping, made simple
@@ -354,7 +354,7 @@ export default function HomePage() {
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
                       href="#best-sellers"
-                      className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                      className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
                     >
                       Shop Best Sellers
                     </Link>
@@ -369,40 +369,40 @@ export default function HomePage() {
               </div>
 
               <div className="grid gap-6">
-                <div className="rounded-3xl bg-slate-900 p-6 text-white shadow-sm">
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                    This week’s top picks
+<div className="rounded-3xl bg-primary p-6 text-primary-foreground shadow-sm">
+                  <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60">
+                    This week&apos;s top picks
                   </p>
                   <h3 className="mt-3 text-2xl font-semibold leading-snug">
                     Hand-picked deals customers love
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-white/75">
+                  <p className="mt-3 text-sm leading-6 text-primary-foreground/75">
                     Save on popular products across electronics, home and
                     lifestyle.
                   </p>
                   <Link
                     href="#deals"
-                    className="mt-5 inline-flex rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                    className="mt-5 inline-flex rounded-xl bg-card px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-muted"
                   >
                     View Deals
                   </Link>
                 </div>
 
-                <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                     Why customers choose us
                   </p>
-                  <div className="mt-4 grid gap-3 text-sm text-slate-700">
-                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                  <div className="mt-4 grid gap-3 text-sm text-foreground/80">
+                    <div className="rounded-2xl bg-muted px-4 py-3">
                       Clear prices with no confusion
                     </div>
-                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                    <div className="rounded-2xl bg-muted px-4 py-3">
                       Easy category browsing
                     </div>
-                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                    <div className="rounded-2xl bg-muted px-4 py-3">
                       Fast and secure checkout
                     </div>
-                    <div className="rounded-2xl bg-slate-50 px-4 py-3">
+                    <div className="rounded-2xl bg-muted px-4 py-3">
                       Helpful customer support
                     </div>
                   </div>
@@ -412,17 +412,17 @@ export default function HomePage() {
 
             <section
               id="categories-section"
-              className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+              className="rounded-3xl border border-border bg-card p-6 shadow-sm"
             >
               <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                     Popular Categories
                   </p>
                   <h2 className="mt-2 text-2xl font-bold md:text-3xl">
                     Find what you need faster
                   </h2>
-                  <p className="mt-2 max-w-2xl text-sm text-slate-600 md:text-base">
+                  <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
                     Start with the most popular sections to quickly reach the
                     products you are looking for.
                   </p>
@@ -430,7 +430,7 @@ export default function HomePage() {
 
                 <Link
                   href="/categories"
-                  className="text-sm font-semibold text-slate-900 hover:underline"
+                  className="text-sm font-semibold text-primary hover:underline"
                 >
                   View all categories
                 </Link>
@@ -441,7 +441,7 @@ export default function HomePage() {
                   <Link
                     key={category.slug}
                     href={`/category/${category.slug}`}
-                    className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:shadow-md"
+                    className="group overflow-hidden rounded-2xl border border-border bg-card transition hover:-translate-y-0.5 hover:shadow-md"
                   >
                     <img
                       src={category.image}
@@ -449,10 +449,10 @@ export default function HomePage() {
                       className="h-36 w-full object-cover transition duration-300 group-hover:scale-105"
                     />
                     <div className="p-4">
-                      <h3 className="text-base font-semibold text-slate-900">
+                      <h3 className="text-base font-semibold text-foreground">
                         {category.name}
                       </h3>
-                      <p className="mt-1 text-sm text-slate-500">
+                      <p className="mt-1 text-sm text-muted-foreground">
                         Explore products in this category
                       </p>
                     </div>
@@ -464,27 +464,27 @@ export default function HomePage() {
         </section>
 
         <section className="mt-8 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+            <p className="text-sm font-semibold text-foreground">
               Fast delivery
             </p>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-muted-foreground">
               Quick dispatch and reliable shipping updates.
             </p>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+            <p className="text-sm font-semibold text-foreground">
               Secure payment
             </p>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-muted-foreground">
               Safe checkout with trusted payment methods.
             </p>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+            <p className="text-sm font-semibold text-foreground">
               Easy returns
             </p>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-muted-foreground">
               Clear return policy and helpful support when needed.
             </p>
           </div>
@@ -492,24 +492,24 @@ export default function HomePage() {
 
         <section
           id="deals"
-          className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+          className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm"
         >
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 Best Deals Today
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
                 Save on selected favorites
               </h2>
-              <p className="mt-2 text-sm text-slate-600 md:text-base">
+              <p className="mt-2 text-sm text-muted-foreground md:text-base">
                 Great prices on products customers check most often.
               </p>
             </div>
 
             <Link
               href="/deals"
-              className="text-sm font-semibold text-slate-900 hover:underline"
+              className="text-sm font-semibold text-primary hover:underline"
             >
               See all deals
             </Link>
@@ -519,14 +519,14 @@ export default function HomePage() {
             {products.slice(0, 3).map((product) => (
               <div
                 key={product.id}
-                className="rounded-2xl border border-slate-200 bg-white p-4 transition hover:shadow-md"
+                className="rounded-2xl border border-border bg-card p-4 transition hover:shadow-md"
               >
-                <div className="mb-3 inline-flex rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">
+                <div className="mb-3 inline-flex rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-accent-foreground">
                   {product.badge || "Sale"}
                 </div>
 
                 <Link href={`/product/${product.id}`} className="block">
-                  <div className="overflow-hidden rounded-2xl bg-slate-100">
+                  <div className="overflow-hidden rounded-2xl bg-muted">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -535,13 +535,13 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-4">
-                    <h3 className="text-lg font-semibold text-slate-900">
+                    <h3 className="text-lg font-semibold text-foreground">
                       {product.name}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
                       {product.shortInfo}
                     </p>
-                    <p className="mt-4 text-2xl font-bold text-slate-900">
+                    <p className="mt-4 text-2xl font-bold text-foreground">
                       €{product.price}
                     </p>
                   </div>
@@ -549,7 +549,7 @@ export default function HomePage() {
 
                 <button
                   onClick={() => addToCart(product)}
-                  className="mt-4 w-full rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="mt-4 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
                 >
                   Add to Cart
                 </button>
@@ -560,24 +560,24 @@ export default function HomePage() {
 
         <section
           id="new-arrivals"
-          className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+          className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm"
         >
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 New Arrivals
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
                 Latest products in store
               </h2>
-              <p className="mt-2 text-sm text-slate-600 md:text-base">
+              <p className="mt-2 text-sm text-muted-foreground md:text-base">
                 Fresh additions for work, home and entertainment.
               </p>
             </div>
 
             <Link
               href="/new-arrivals"
-              className="text-sm font-semibold text-slate-900 hover:underline"
+              className="text-sm font-semibold text-primary hover:underline"
             >
               View all new arrivals
             </Link>
@@ -587,14 +587,14 @@ export default function HomePage() {
             {products.slice(1, 4).map((product) => (
               <div
                 key={product.id}
-                className="rounded-2xl border border-slate-200 bg-white p-4 transition hover:shadow-md"
+                className="rounded-2xl border border-border bg-card p-4 transition hover:shadow-md"
               >
-                <div className="mb-3 inline-flex rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">
+                <div className="mb-3 inline-flex rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
                   New
                 </div>
 
                 <Link href={`/product/${product.id}`} className="block">
-                  <div className="overflow-hidden rounded-2xl bg-slate-100">
+                  <div className="overflow-hidden rounded-2xl bg-muted">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -603,13 +603,13 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-4">
-                    <h3 className="text-lg font-semibold text-slate-900">
+                    <h3 className="text-lg font-semibold text-foreground">
                       {product.name}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
                       {product.shortInfo}
                     </p>
-                    <p className="mt-4 text-2xl font-bold text-slate-900">
+                    <p className="mt-4 text-2xl font-bold text-foreground">
                       €{product.price}
                     </p>
                   </div>
@@ -617,7 +617,7 @@ export default function HomePage() {
 
                 <Link
                   href={`/product/${product.id}`}
-                  className="mt-4 block w-full rounded-xl border border-slate-300 px-5 py-3 text-center text-sm font-semibold text-slate-900 transition hover:border-slate-900"
+                  className="mt-4 block w-full rounded-xl border border-border px-5 py-3 text-center text-sm font-semibold text-foreground transition hover:border-primary"
                 >
                   View Product
                 </Link>
@@ -628,24 +628,24 @@ export default function HomePage() {
 
         <section
           id="best-sellers"
-          className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+          className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm"
         >
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 Best Sellers
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
                 Most popular products this week
               </h2>
-              <p className="mt-2 text-sm text-slate-600 md:text-base">
+              <p className="mt-2 text-sm text-muted-foreground md:text-base">
                 Trusted picks customers return to again and again.
               </p>
             </div>
 
             <Link
               href="/best-sellers"
-              className="text-sm font-semibold text-slate-900 hover:underline"
+              className="text-sm font-semibold text-primary hover:underline"
             >
               Browse all best sellers
             </Link>
@@ -655,10 +655,10 @@ export default function HomePage() {
             {products.map((product) => (
               <div
                 key={product.id}
-                className="group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-2xl border border-border bg-card p-4 transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <Link href={`/product/${product.id}`} className="block">
-                  <div className="overflow-hidden rounded-2xl bg-slate-100">
+                  <div className="overflow-hidden rounded-2xl bg-muted">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -667,16 +667,16 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-4">
-                    <div className="mb-2 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                    <div className="mb-2 inline-flex rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
                       {product.badge || "Popular"}
                     </div>
-                    <h3 className="text-lg font-semibold text-slate-900">
+                    <h3 className="text-lg font-semibold text-foreground">
                       {product.name}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
                       {product.shortInfo}
                     </p>
-                    <p className="mt-4 text-2xl font-bold text-slate-900">
+                    <p className="mt-4 text-2xl font-bold text-foreground">
                       €{product.price}
                     </p>
                   </div>
@@ -684,7 +684,7 @@ export default function HomePage() {
 
                 <button
                   onClick={() => addToCart(product)}
-                  className="mt-4 w-full rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="mt-4 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
                 >
                   Add to Cart
                 </button>
@@ -693,17 +693,17 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm">
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 Need help choosing?
               </p>
               <h2 className="mt-2 text-2xl font-bold md:text-3xl">
                 Browse by category, compare products, and find the right item
                 faster
               </h2>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 md:text-base">
+              <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground md:text-base">
                 We designed the store to be simple and readable, so customers
                 can find products quickly and shop with confidence.
               </p>
@@ -711,34 +711,34 @@ export default function HomePage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href="/categories"
-                  className="rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
                 >
                   View All Categories
                 </Link>
                 <Link
                   href="/contact-us"
-                  className="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-900"
+                  className="rounded-xl border border-border px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary"
                 >
                   Contact Support
                 </Link>
               </div>
             </div>
 
-            <div className="rounded-3xl bg-slate-50 p-6">
-              <h3 className="text-lg font-semibold text-slate-900">
+            <div className="rounded-3xl bg-muted p-6">
+              <h3 className="text-lg font-semibold text-foreground">
                 Useful Links
               </h3>
-              <div className="mt-4 grid gap-3 text-sm text-slate-600">
-                <Link href="/delivery" className="hover:text-slate-900">
+              <div className="mt-4 grid gap-3 text-sm text-muted-foreground">
+                <Link href="/delivery" className="hover:text-foreground">
                   Delivery Information
                 </Link>
-                <Link href="/payment" className="hover:text-slate-900">
+                <Link href="/payment" className="hover:text-foreground">
                   Payment Methods
                 </Link>
-                <Link href="/returns" className="hover:text-slate-900">
+                <Link href="/returns" className="hover:text-foreground">
                   Returns & Refunds
                 </Link>
-                <Link href="/contact-us" className="hover:text-slate-900">
+                <Link href="/contact-us" className="hover:text-foreground">
                   Customer Support
                 </Link>
               </div>

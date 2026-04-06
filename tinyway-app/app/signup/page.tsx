@@ -246,16 +246,16 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-black">
+    <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-7xl px-6 py-8 md:px-10">
-        <div className="mb-6 flex items-center justify-between border-b border-black/10 pb-4 text-sm uppercase tracking-[0.25em] text-black/60">
+        <div className="mb-6 flex items-center justify-between border-b border-border pb-4 text-sm uppercase tracking-[0.25em] text-muted-foreground">
           <span>Luxury minimal electronics</span>
           <span>Black / White Collection</span>
         </div>
 
         <header className="mb-16 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/50">
+            <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
               TinyWay.eu
             </p>
             <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
@@ -266,7 +266,7 @@ export default function SignupPage() {
           <nav className="flex flex-wrap items-center gap-3">
             <Link
               href="/login"
-              className="rounded-full border border-black px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-black hover:text-white"
+              className="rounded-full border border-border px-5 py-2 text-sm font-medium uppercase tracking-[0.2em] transition hover:bg-primary hover:text-primary-foreground hover:border-primary"
             >
               Back to login
             </Link>
@@ -274,22 +274,22 @@ export default function SignupPage() {
         </header>
 
         <section className="grid gap-6 md:grid-cols-2">
-          <div className="flex min-h-[680px] flex-col justify-between rounded-[2rem] border border-black bg-black p-8 text-white md:p-12">
+          <div className="flex min-h-[680px] flex-col justify-between rounded-[2rem] border border-primary bg-primary p-8 text-primary-foreground md:p-12">
             <div>
-              <p className="mb-6 text-xs uppercase tracking-[0.45em] text-white/60">
+              <p className="mb-6 text-xs uppercase tracking-[0.45em] text-primary-foreground/60">
                 New Account
               </p>
               <h2 className="max-w-xl text-4xl font-semibold leading-tight md:text-6xl">
                 Create your TinyWay account
               </h2>
-              <p className="mt-6 max-w-lg text-base leading-7 text-white/70 md:text-lg">
+              <p className="mt-6 max-w-lg text-base leading-7 text-primary-foreground/70 md:text-lg">
                 Choose your account type. The registration form changes
                 automatically for customer or partner.
               </p>
             </div>
 
-            <div className="rounded-[1.5rem] border border-white/15 bg-white/5 p-5">
-              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+            <div className="rounded-[1.5rem] border border-primary-foreground/15 bg-primary-foreground/5 p-5">
+              <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/50">
                 Selected account type
               </p>
               <p className="mt-2 text-lg font-medium">
@@ -298,10 +298,10 @@ export default function SignupPage() {
             </div>
           </div>
 
-          <div className="flex min-h-[680px] items-center rounded-[2rem] border border-black/10 bg-[#f8f8f8] p-8 md:p-12">
+          <div className="flex min-h-[680px] items-center rounded-[2rem] border border-border bg-muted p-8 md:p-12">
             <div className="w-full">
               <div className="mb-8">
-                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-black/40">
+                <p className="mb-3 text-xs uppercase tracking-[0.45em] text-muted-foreground">
                   Registration
                 </p>
                 <h2 className="text-3xl font-semibold md:text-4xl">
@@ -311,7 +311,7 @@ export default function SignupPage() {
 
               <form onSubmit={handleSignup} className="space-y-5">
                 <div>
-                  <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-black/45">
+                  <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground">
                     Account type
                   </label>
 
@@ -321,8 +321,8 @@ export default function SignupPage() {
                       onClick={() => setUserType("customer")}
                       className={`rounded-full px-5 py-4 text-sm font-medium uppercase tracking-[0.2em] transition ${
                         userType === "customer"
-                          ? "bg-black text-white"
-                          : "border border-black/15 bg-white text-black hover:bg-black hover:text-white"
+                          ? "bg-primary text-primary-foreground"
+                          : "border border-border bg-card text-foreground hover:bg-primary hover:text-primary-foreground"
                       }`}
                     >
                       Customer
@@ -333,8 +333,8 @@ export default function SignupPage() {
                       onClick={() => setUserType("partner")}
                       className={`rounded-full px-5 py-4 text-sm font-medium uppercase tracking-[0.2em] transition ${
                         userType === "partner"
-                          ? "bg-black text-white"
-                          : "border border-black/15 bg-white text-black hover:bg-black hover:text-white"
+                          ? "bg-primary text-primary-foreground"
+                          : "border border-border bg-card text-foreground hover:bg-primary hover:text-primary-foreground"
                       }`}
                     >
                       Partner
@@ -475,23 +475,23 @@ export default function SignupPage() {
                 )}
 
                 {error && (
-                  <div className="rounded-[1.25rem] border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-600">
+                  <div className="rounded-[1.25rem] border border-destructive/30 bg-destructive/10 px-5 py-4 text-sm text-destructive">
                     {error}
                   </div>
                 )}
 
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-black px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-white transition hover:opacity-85"
+                  className="w-full rounded-full bg-primary px-6 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
                 >
                   Sign up
                 </button>
               </form>
 
               <div className="mt-6 text-center">
-                <p className="text-sm text-black/50">
+                <p className="text-sm text-muted-foreground">
                   Already have an account?{" "}
-                  <Link href="/login" className="font-medium text-black underline">
+                  <Link href="/login" className="font-medium text-primary underline">
                     Login
                   </Link>
                 </p>
@@ -525,7 +525,7 @@ function FormInput({
     <div>
       <label
         htmlFor={name}
-        className="mb-2 block text-xs uppercase tracking-[0.3em] text-black/45"
+        className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground"
       >
         {label}
       </label>
@@ -536,7 +536,7 @@ function FormInput({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full rounded-full border border-black/15 bg-white px-6 py-4 text-black outline-none transition placeholder:text-black/35 focus:border-black"
+        className="w-full rounded-full border border-border bg-card px-6 py-4 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
       />
     </div>
   );
@@ -561,7 +561,7 @@ function PhoneInput({
 }: PhoneInputProps) {
   return (
     <div>
-      <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-black/45">
+      <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-muted-foreground">
         Phone number
       </label>
 
@@ -570,7 +570,7 @@ function PhoneInput({
           name={countryCodeName}
           value={countryCodeValue}
           onChange={onChange}
-          className="rounded-full border border-black/15 bg-white px-4 py-4 text-black outline-none transition focus:border-black"
+          className="rounded-full border border-border bg-card px-4 py-4 text-foreground outline-none transition focus:border-primary"
         >
           {countryOptions.map((country) => (
             <option key={country.code} value={country.code}>
@@ -585,7 +585,7 @@ function PhoneInput({
           value={phoneNumberValue}
           onChange={onChange}
           placeholder="Enter phone number"
-          className="w-full rounded-full border border-black/15 bg-white px-6 py-4 text-black outline-none transition placeholder:text-black/35 focus:border-black"
+          className="w-full rounded-full border border-border bg-card px-6 py-4 text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
         />
       </div>
     </div>
