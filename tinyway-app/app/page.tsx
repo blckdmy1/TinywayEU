@@ -197,160 +197,147 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      {/* Main Header - Warm Theme */}
-      <header className="sticky top-0 z-40 bg-primary text-primary-foreground shadow-md">
-        {/* Top Row: Logo, Search, Account, Cart */}
-        <div className="mx-auto max-w-[1500px] px-4">
-          <div className="flex items-center gap-3 py-3 md:gap-4">
+      {/* Modern Glass Header */}
+      <header className="sticky top-0 z-40 border-b border-border/50 bg-card/80 backdrop-blur-xl">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          {/* Main Row */}
+          <div className="flex items-center justify-between gap-4 py-4">
             {/* Logo */}
-            <Link href="/" className="shrink-0 py-1 px-2 rounded-lg hover:bg-primary-foreground/10 transition">
-              <span className="text-2xl font-bold tracking-tight font-serif">TinyWay</span>
-              <span className="text-sm text-primary-foreground/80 font-medium">.eu</span>
+            <Link href="/" className="flex items-baseline gap-0.5 group">
+              <span className="text-2xl font-bold tracking-tight text-foreground group-hover:text-primary transition">TinyWay</span>
+              <span className="text-sm font-medium text-primary">.eu</span>
             </Link>
 
-            {/* Deliver To */}
-            <Link href="/delivery" className="hidden md:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-              <span className="text-xs text-primary-foreground/70">{t("deliverTo")}</span>
-              <span className="text-sm font-semibold flex items-center gap-1">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            {/* Search Bar - Centered */}
+            <div className="hidden md:flex flex-1 max-w-xl mx-8">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder={t("searchPlaceholder")}
+                  className="w-full h-11 pl-12 pr-4 text-sm bg-muted/50 border border-border rounded-full outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition placeholder:text-muted-foreground"
+                />
+                <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                {t("europe")}
-              </span>
-            </Link>
-
-            {/* Search Bar */}
-            <div className="flex flex-1 max-w-3xl">
-              <select className="hidden md:block bg-muted text-foreground text-xs px-3 py-2.5 rounded-l-xl border-r border-border outline-none cursor-pointer">
-                <option>{t("allCategories")}</option>
-                {categories.slice(0, 8).map((cat) => (
-                  <option key={cat.slug}>{cat.name}</option>
-                ))}
-              </select>
-              <input
-                type="text"
-                placeholder={t("searchPlaceholder")}
-                className="w-full px-4 py-2.5 text-sm text-foreground bg-card outline-none md:rounded-none rounded-l-xl placeholder:text-muted-foreground"
-              />
-              <button className="bg-primary-foreground hover:bg-primary-foreground/90 px-4 py-2.5 rounded-r-xl transition">
-                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Language Selector */}
-            <div className="relative">
-              <button
-                onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
-              >
-                <span className="text-sm font-semibold">{languages.find(l => l.code === language)?.flag}</span>
-                <span className="text-sm font-semibold">{language.toUpperCase()}</span>
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {langMenuOpen && (
-                <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-xl shadow-lg py-2 min-w-[160px] z-50">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        setLanguage(lang.code as Language);
-                        setLangMenuOpen(false);
-                      }}
-                      className={`w-full px-4 py-2 text-left text-sm hover:bg-muted transition flex items-center gap-2 ${
-                        language === lang.code ? "bg-muted font-semibold" : ""
-                      }`}
-                    >
-                      <span>{lang.flag}</span>
-                      <span className="text-foreground">{lang.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Account */}
-            <Link
-              href={user ? "/cabinet" : "/login"}
-              className="hidden sm:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
-            >
-              <span className="text-xs text-primary-foreground/70">
-                {user ? `${t("hello")}, ${user.email.split("@")[0]}` : t("helloSignIn")}
-              </span>
-              <span className="text-sm font-semibold flex items-center gap-1">
-                {t("account")}
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </Link>
-
-            {/* Orders */}
-            <Link
-              href="/cabinet"
-              className="hidden lg:flex flex-col px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
-            >
-              <span className="text-xs text-primary-foreground/70">{t("returns")}</span>
-              <span className="text-sm font-semibold">{t("orders")}</span>
-            </Link>
-
-            {/* Cart */}
-            <Link
-              href="/cart"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition"
-            >
-              <div className="relative">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary-foreground text-[11px] font-bold text-primary">
-                  {cart.length}
-                </span>
               </div>
-              <span className="hidden sm:block text-sm font-semibold">{t("cart")}</span>
-            </Link>
+            </div>
+
+            {/* Right Actions */}
+            <div className="flex items-center gap-1">
+              {/* Language Selector */}
+              <div className="relative">
+                <button
+                  onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  className="flex items-center gap-1.5 h-10 px-3 rounded-full hover:bg-muted transition"
+                >
+                  <span className="text-base">{languages.find(l => l.code === language)?.flag}</span>
+                  <span className="hidden sm:block text-sm font-medium text-foreground">{language.toUpperCase()}</span>
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {langMenuOpen && (
+                  <div className="absolute right-0 top-full mt-2 bg-card border border-border rounded-2xl shadow-xl py-2 min-w-[180px] z-50">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code as Language);
+                          setLangMenuOpen(false);
+                        }}
+                        className={`w-full px-4 py-2.5 text-left text-sm hover:bg-muted transition flex items-center gap-3 ${
+                          language === lang.code ? "bg-muted font-medium" : ""
+                        }`}
+                      >
+                        <span className="text-lg">{lang.flag}</span>
+                        <span className="text-foreground">{lang.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Account */}
+              <Link
+                href={user ? "/cabinet" : "/login"}
+                className="hidden sm:flex items-center gap-2 h-10 px-3 rounded-full hover:bg-muted transition"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <div className="hidden lg:block text-left">
+                  <p className="text-xs text-muted-foreground leading-none">
+                    {user ? t("hello") : t("helloSignIn")}
+                  </p>
+                  <p className="text-sm font-medium text-foreground leading-tight">
+                    {user ? user.email.split("@")[0] : t("account")}
+                  </p>
+                </div>
+              </Link>
+
+              {/* Cart */}
+              <Link
+                href="/cart"
+                className="flex items-center gap-2 h-10 px-3 rounded-full hover:bg-muted transition"
+              >
+                <div className="relative">
+                  <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  {cart.length > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                      {cart.length}
+                    </span>
+                  )}
+                </div>
+                <span className="hidden sm:block text-sm font-medium text-foreground">{t("cart")}</span>
+              </Link>
+            </div>
           </div>
+
+          {/* Navigation Row */}
+          <nav className="flex items-center gap-1 overflow-x-auto pb-3 -mx-1">
+            <Link href="/deals" className="whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("todaysDeals")}
+            </Link>
+            <Link href="/best-sellers" className="whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("bestSellers")}
+            </Link>
+            <Link href="/new-arrivals" className="whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("newArrivals")}
+            </Link>
+            <span className="w-px h-5 bg-border mx-2" />
+            <Link href="/category/phones" className="whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("phones")}
+            </Link>
+            <Link href="/category/computers" className="whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("computers")}
+            </Link>
+            <Link href="/category/tv-audio" className="hidden md:block whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("tvAudio")}
+            </Link>
+            <Link href="/category/gaming" className="hidden md:block whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("gaming")}
+            </Link>
+            <Link href="/contact-us" className="hidden lg:block whitespace-nowrap px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted rounded-full transition">
+              {t("helpSupport")}
+            </Link>
+          </nav>
         </div>
 
-        {/* Bottom Row: Navigation */}
-        <div className="bg-primary/80 border-t border-primary-foreground/10">
-          <div className="mx-auto max-w-[1500px] px-4">
-            <nav className="flex items-center gap-1 overflow-x-auto py-2 text-sm">
-              <button className="flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 font-semibold rounded-lg hover:bg-primary-foreground/10 transition">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                {t("allCategories")}
-              </button>
-              <Link href="/deals" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("todaysDeals")}
-              </Link>
-              <Link href="/best-sellers" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("bestSellers")}
-              </Link>
-              <Link href="/new-arrivals" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("newArrivals")}
-              </Link>
-              <Link href="/category/phones" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("phones")}
-              </Link>
-              <Link href="/category/computers" className="whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("computers")}
-              </Link>
-              <Link href="/category/tv-audio" className="hidden md:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("tvAudio")}
-              </Link>
-              <Link href="/category/gaming" className="hidden md:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("gaming")}
-              </Link>
-              <Link href="/contact-us" className="hidden lg:block whitespace-nowrap px-3 py-1.5 rounded-lg hover:bg-primary-foreground/10 transition">
-                {t("helpSupport")}
-              </Link>
-            </nav>
+        {/* Mobile Search */}
+        <div className="md:hidden px-4 pb-3">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder={t("searchPlaceholder")}
+              className="w-full h-10 pl-10 pr-4 text-sm bg-muted/50 border border-border rounded-full outline-none focus:border-primary transition placeholder:text-muted-foreground"
+            />
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
           </div>
         </div>
       </header>
