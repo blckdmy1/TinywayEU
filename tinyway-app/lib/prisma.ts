@@ -5,15 +5,17 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-const connectionString = process.env.DATABASE_URL;
+let prisma: PrismaClient;
 
-if (!connectionString) {
+if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is missing");
 }
 
-const adapter = new PrismaPg({ connectionString });
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
 
-export const prisma =
+prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
     adapter,
@@ -22,3 +24,5 @@ export const prisma =
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
 }
+
+export { prisma };
