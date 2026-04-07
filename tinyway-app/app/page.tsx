@@ -231,7 +231,6 @@ export default function HomePage() {
                   className="flex items-center gap-1.5 h-10 px-3 rounded-full hover:bg-muted transition"
                 >
                   <span className="text-base">{languages.find(l => l.code === language)?.flag}</span>
-                  <span className="hidden sm:block text-sm font-medium text-foreground">{language.toUpperCase()}</span>
                   <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
