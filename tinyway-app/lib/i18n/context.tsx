@@ -46,7 +46,7 @@ export function useI18n() {
 }
 
 export const languages: { code: Language; name: string; flag: string }[] = [
-  { code: "en", name: "English", flag: "GB" },
+  { code: "en", name: "English", flag: "ENG" },
   { code: "lv", name: "Latviešu", flag: "LV" },
   { code: "lt", name: "Lietuvių", flag: "LT" },
   { code: "et", name: "Eesti", flag: "EE" },
